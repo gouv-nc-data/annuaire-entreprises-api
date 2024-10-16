@@ -1,0 +1,13 @@
+services:
+  db:
+    image: postgres:15
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: password
+  webdb:
+    image: webdb/app
+    ports:
+      - 22071:22071
+    environment:
+      SCAN_HOSTS: db
