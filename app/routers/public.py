@@ -1,15 +1,10 @@
 from fastapi import APIRouter, Request
-from app.controllers.search import search
+
+from app.services.build_api_response import build_api_response
 
 router = APIRouter()
 
 
 @router.get("/recherche")
-async def search_text_endpoint(request: Request):
-    print("request :", request)
-
-    results = search(request)
-
-    print('results : ', results)
-
-    return {"result": "ok"}
+async def search_endpoint(request: Request):
+    return build_api_response(request)
