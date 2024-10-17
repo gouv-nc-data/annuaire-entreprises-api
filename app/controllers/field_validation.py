@@ -22,3 +22,8 @@ VALID_FIELD_VALUES = {
         "alias": "activite_principale",
     },
 }
+
+FIELD_LENGTHS = {
+    "code_postal": 5,
+    "terms": 3,
+}

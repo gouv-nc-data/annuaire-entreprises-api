@@ -4,6 +4,7 @@ from datetime import date
 from pydantic import BaseModel, field_validator, model_validator
 
 from app.controllers.field_validation import (
+    FIELD_LENGTHS,
     NUMERIC_FIELD_LIMITS,
     VALID_FIELD_VALUES,
 )
@@ -20,6 +21,7 @@ from app.utils.helpers import (
 class SearchParams(BaseModel):
     """Class for modeling search parameters"""
 
+    terms: str | None = None
     page: int = 1
     per_page: int = 10
     commune: list | None = None
@@ -52,6 +54,13 @@ class SearchParams(BaseModel):
                 f"par défaut `{limits['default']}`."
             )
         return value
+
+    @field_validator(
+        "terms",
+        mode="before",
+    )
+    def make_uppercase(cls, value: str) -> str:
+        return value.upper()
 
     @field_validator(
         "forme_juridique",
@@ -126,5 +135,32 @@ class SearchParams(BaseModel):
         if all_fields_are_null_except_excluded:
             raise InvalidParamError(
                 "Veuillez indiquer au moins un paramètre de recherche."
+            )
+        return self
+
+    @model_validator(mode="after")
+    def check_if_short_terms_and_no_other_param(self):
+        """Prevent performance issues by refusing query terms less than 3 characters.
+        Accept less than 3 characters if at least one parameter is filled.
+        Except matching size, because this param always has a default value.
+        """
+        # List of parameters to exclude from the check
+        excluded_fields = [
+            "page",
+            "per_page",
+            "terms",
+        ]
+
+        all_fields_are_null_except_excluded = check_params_are_none_except_excluded(
+            self.dict(exclude_unset=True), excluded_fields
+        )
+        if (
+            self.terms is not None
+            and len(self.terms) < FIELD_LENGTHS["terms"]
+            and all_fields_are_null_except_excluded
+        ):
+            raise InvalidParamError(
+                "3 caractères minimum pour les termes de la requête "
+                + "(ou utilisez au moins un filtre)"
             )
         return self
