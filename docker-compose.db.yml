@@ -1,4 +1,4 @@
-version: "3"
+
 services:
   recherche-entreprises-db:
     container_name: recherche-entreprises
@@ -14,6 +14,13 @@ services:
       - recherche-entreprises:/var/lib/postgresql/data/ #using a volume
     ports:
       - "5432:5432"
+  webdb:
+    image: webdb/app
+    ports:
+      - 22071:22071
+    environment:
+      SCAN_HOSTS: recherche-entreprises-db
+
 
 volumes:
   recherche-entreprises:

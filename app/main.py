@@ -9,6 +9,28 @@ from app.exceptions.exceptions import (
 from app.database.connection import engine
 from app.database import models
 from app.routers import public
+from alembic.config import Config
+from alembic import command
+
+import logging
+from contextlib import asynccontextmanager
+
+log = logging.getLogger("uvicorn")
+
+
+def run_migrations():
+    alembic_cfg = Config("alembic.ini")
+    command.upgrade(alembic_cfg, "head")
+
+
+@asynccontextmanager
+async def lifespan(app_: FastAPI):
+    log.info("Starting up...")
+    log.info("run alembic upgrade head...")
+    run_migrations()
+    yield
+    log.info("Shutting down...")
+
 
 app = FastAPI(
     title="API Recherche d'entreprises | Gouv.nc",
@@ -22,6 +44,7 @@ app = FastAPI(
         "name": "Apache 2.0",
         "url": "https://www.apache.org/licenses/LICENSE-2.0.html",
     },
+    lifespan=lifespan
 )
 
 models.Base.metadata.create_all(bind=engine)
