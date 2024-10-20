@@ -1,8 +1,8 @@
 from fastapi.responses import ORJSONResponse
 
 from app.controllers.search_params_builder import SearchParamsBuilder
-from app.services.search.search_results import SearchResult
 from app.models.response_builder import ResponseBuilder
+from app.services.search.search_results import SearchResult
 
 
 def build_api_response(

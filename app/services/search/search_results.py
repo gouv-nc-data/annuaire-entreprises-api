@@ -1,5 +1,5 @@
-from app.services.search.search_builder import build_search
 from app.services.search.queries.search_by_ridet import search_by_ridet
+from app.services.search.search_builder import build_search
 
 
 class SearchResult:

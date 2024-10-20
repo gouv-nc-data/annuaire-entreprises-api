@@ -3,15 +3,13 @@ from typing import Callable
 
 from fastapi import FastAPI, Request
 from fastapi.responses import ORJSONResponse
+
+from app.exceptions.exceptions import (InternalError, InvalidParamError,
+                                       InvalidRidetError, NotFoundError,
+                                       SearchApiError)
+
 # from sentry_sdk import capture_exception, push_scope
 
-from app.exceptions.exceptions import (
-    InternalError,
-    InvalidParamError,
-    InvalidRidetError,
-    NotFoundError,
-    SearchApiError,
-)
 
 
 def create_exception_handler(

@@ -1,19 +1,14 @@
-from fastapi import FastAPI
-from sqlalchemy.orm import Session
-
-from app.exceptions.exception_handlers import add_exception_handlers
-from app.exceptions.exceptions import (
-    NotFoundError,
-)
-
-from app.database.connection import engine
-from app.database import models
-from app.routers import public
-from alembic.config import Config
-from alembic import command
-
 import logging
 from contextlib import asynccontextmanager
+
+from fastapi import FastAPI
+
+from alembic import command
+from alembic.config import Config
+from app.database import models
+from app.database.connection import engine
+from app.exceptions.exception_handlers import add_exception_handlers
+from app.routers import public
 
 log = logging.getLogger("uvicorn")
 

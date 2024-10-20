@@ -1,16 +1,14 @@
-from app.database.connection import SessionLocal
 from app.database import models
-
-from app.services.search.parsers.ridet import is_ridet
+from app.database.connection import SessionLocal
 
 db = SessionLocal()
 
 
 def search_by_ridet(searchParams):
     # is_ridet = is_ridet()
-
-    items = db.query(models.Entreprise).limit(10).all()
     total_results = 10
+    items = db.query(models.Entreprise).limit(total_results).all()
+    
 
     results = []
 

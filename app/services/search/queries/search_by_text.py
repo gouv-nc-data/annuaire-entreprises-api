@@ -1,7 +1,5 @@
-from app.database.connection import SessionLocal
 from app.database import models
-
-from app.services.search.parsers.ridet import is_ridet
+from app.database.connection import SessionLocal
 
 db = SessionLocal()
 

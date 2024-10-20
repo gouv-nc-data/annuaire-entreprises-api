@@ -1,11 +1,7 @@
-import json
 
-from app.models.entreprise import (
-    EntrepriseResponse,
-)
-
-from app.services.formatters.nom_complet import format_nom_complet
+from app.models.entreprise import EntrepriseResponse
 from app.services.formatters.adresse_complete import format_adresse_complete
+from app.services.formatters.nom_complet import format_nom_complet
 
 
 def format_single_entreprise(result, search_params):

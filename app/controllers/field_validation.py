@@ -1,6 +1,4 @@
-from app.labels.helpers import (
-    FORME_JURIDIQUES,
-)
+from app.labels.helpers import FORME_JURIDIQUES
 
 NUMERIC_FIELD_LIMITS = {
     "page": {"min": 1, "max": 1000, "default": 1, "alias": "page"},
