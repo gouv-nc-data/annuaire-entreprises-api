@@ -5,6 +5,7 @@ from app.services.search.parsers.ridet import is_ridet
 
 db = SessionLocal()
 
+
 def search_by_text(searchParams):
     # is_ridet = is_ridet()
 

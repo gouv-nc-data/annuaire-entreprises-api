@@ -1,4 +1,3 @@
-
 import logging
 from typing import Callable
 
@@ -44,7 +43,7 @@ async def unhandled_exception_handler(
 ) -> ORJSONResponse:
     logging.error(f"Unhandled exception occurred: {exc}", exc_info=True)
 
-    # TODO add sentry  
+    # TODO add sentry
     # with push_scope() as scope:
     #     scope.set_context(
     #         "request",

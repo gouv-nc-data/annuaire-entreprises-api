@@ -44,14 +44,13 @@ app = FastAPI(
         "name": "Apache 2.0",
         "url": "https://www.apache.org/licenses/LICENSE-2.0.html",
     },
-    lifespan=lifespan
+    lifespan=lifespan,
 )
 
 models.Base.metadata.create_all(bind=engine)
 
 # Include routers
-app.include_router(public.router,prefix='/api/v1')
+app.include_router(public.router, prefix="/api/v1")
 
 # Add exception handlers
 add_exception_handlers(app)
-
