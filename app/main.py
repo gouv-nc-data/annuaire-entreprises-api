@@ -32,12 +32,12 @@ app = FastAPI(
     version="0.0.1",
     contact={
         "name": "Direction du numérique et de la modernisation",
-        "url": "https://numerique.gouv.nc/",
+        "url": "https://data.gouv.nc/",
         "email": "data@gouv.nc",
     },
     license_info={
-        "name": "Apache 2.0",
-        "url": "https://www.apache.org/licenses/LICENSE-2.0.html",
+        "name": "Licence Ouverte v2.0",
+        "url": "https://www.etalab.gouv.fr/wp-content/uploads/2017/04/ETALAB-Licence-Ouverte-v2.0.pdf",
     },
     lifespan=lifespan,
 )
