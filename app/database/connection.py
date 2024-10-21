@@ -3,8 +3,14 @@ from sqlalchemy import create_engine
 from sqlalchemy.engine import URL
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+import pprint 
+import os
 
-config = dotenv_values(".env")
+## Surcharge de l'ordre de définition des variables. Celle de l'OS sont prises en compte en premier. Sinon, si le fichier n'existe pas, il n'y a pas de valeur, ce qui est le cas dans le container
+config = {
+    **os.environ,
+    **dotenv_values(".env", )
+}
 
 SQLALCHEMY_DATABASE_URL = config["DATABASE_URL"]
 SQLALCHEMY_DATABASE_USER = config["DATABASE_USERNAME"]
