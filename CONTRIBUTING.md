@@ -25,7 +25,7 @@ docker build -t annuaire-entreprise
 
 # Lancement de l'image locale
 > [!WARNING]\
-> ** Pré requis, la bdd doit être lancée **
+> **Pré requis, la bdd doit être lancée**
 ```
 docker run -e DATABASE_USERNAME=annuaire -e DATABASE_PASSWORD=annuaire -e DATABASE_NAME=annuaire -e DATABASE_URL=127.0.0.1 --network host annuaire-entreprise
 ```
