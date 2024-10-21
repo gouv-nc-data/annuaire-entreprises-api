@@ -29,3 +29,9 @@ docker build -t annuaire-entreprise
 ```
 docker run -e DATABASE_USERNAME=annuaire -e DATABASE_PASSWORD=annuaire -e DATABASE_NAME=annuaire -e DATABASE_URL=127.0.0.1 --network host annuaire-entreprise
 ```
+
+# Qualité de code 
+```
+ruff check --fix app
+isort app
+```
