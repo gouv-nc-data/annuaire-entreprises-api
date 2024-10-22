@@ -1,0 +1,55 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.12, pytest-8.3.3, pluggy-1.5.0
+rootdir: /home/runner/work/annuaire-entreprise-api/annuaire-entreprise-api
+configfile: pytest.ini
+plugins: anyio-4.6.2.post1, cov-5.0.0
+collected 2 items / 1 error
+
+==================================== ERRORS ====================================
+_____________________ ERROR collecting tests/test_docs.py ______________________
+tests/test_docs.py:2: in <module>
+    from main import app
+app/main.py:8: in <module>
+    from app.database import models
+app/database/models.py:3: in <module>
+    from app.database.connection import Base
+app/database/connection.py:14: in <module>
+    SQLALCHEMY_DATABASE_URL = config["DATABASE_URL"]
+E   KeyError: 'DATABASE_URL'
+- generated xml file: /home/runner/work/annuaire-entreprise-api/annuaire-entreprise-api/pytest.xml -
+
+---------- coverage: platform linux, python 3.10.12-final-0 ----------
+Name                                             Stmts   Miss  Cover   Missing
+------------------------------------------------------------------------------
+app/controllers/field_validation.py                  4      4     0%   1-24
+app/controllers/search_params_builder.py            19     19     0%   1-33
+app/controllers/search_params_model.py              67     67     0%   1-158
+app/database/connection.py                          15      7    53%   15-31
+app/database/models.py                              12     10    17%   6-16
+app/exceptions/exception_handlers.py                20     20     0%   1-69
+app/exceptions/exceptions.py                        19     19     0%   1-56
+app/labels/helpers.py                                9      9     0%   1-25
+app/main.py                                         24     18    25%   9-51
+app/models/entreprise.py                            11     11     0%   1-13
+app/models/response.py                               9      9     0%   1-12
+app/models/response_builder.py                      15     15     0%   1-27
+app/routers/public.py                                6      6     0%   1-10
+app/services/build_api_response.py                   9      9     0%   1-23
+app/services/format_search_results.py               21     21     0%   2-49
+app/services/formatters/adresse_complete.py          9      9     0%   1-18
+app/services/formatters/nom_complet.py               7      7     0%   1-14
+app/services/search/parsers/ridet.py                 9      9     0%   1-15
+app/services/search/queries/search_by_ridet.py      10     10     0%   1-18
+app/services/search/queries/search_by_text.py        6      6     0%   1-12
+app/services/search/search_builder.py                7      7     0%   1-11
+app/services/search/search_results.py               18     18     0%   1-24
+app/utils/helpers.py                                24     19    21%   2-3, 7-9, 13-16, 23-25, 29-38
+------------------------------------------------------------------------------
+TOTAL                                              350    329     6%
+
+12 files skipped due to complete coverage.
+
+=========================== short test summary info ============================
+ERROR tests/test_docs.py - KeyError: 'DATABASE_URL'
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+=============================== 1 error in 1.14s ===============================
