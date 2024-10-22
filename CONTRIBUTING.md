@@ -35,3 +35,8 @@ docker run -e DATABASE_USERNAME=annuaire -e DATABASE_PASSWORD=annuaire -e DATABA
 ruff check --fix app
 isort app
 ```
+
+# Lancement des tests
+```
+pytest --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
+```

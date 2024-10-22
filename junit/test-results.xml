@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="1" failures="0" skipped="0" tests="1" time="8.119" timestamp="2024-10-22T15:34:35.238070+11:00" hostname="PC-27291"><testcase classname="" name="alembic.env" time="0.000"><error message="collection failure">alembic/env.py:10: in &lt;module&gt;
+    config = context.config
+E   AttributeError: module 'alembic.context' has no attribute 'config'</error></testcase></testsuite></testsuites>

@@ -3,4 +3,3 @@ SQLAlchemy
 orjson
 psycopg2-binary
 alembic
-
