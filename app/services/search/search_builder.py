@@ -1,9 +1,6 @@
-from app.database.connection import SessionLocal
 from app.services.search.parsers.ridet import is_ridet
 from app.services.search.queries.search_by_ridet import search_by_ridet
 from app.services.search.queries.search_by_text import search_by_text
-
-db = SessionLocal()
 
 
 def build_search(search_build):
