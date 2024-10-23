@@ -1,10 +1,10 @@
-from app.services.search.queries.search_by_ridet import search_by_ridet
 from app.services.search.search_builder import build_search
+from app.services.formatters.entreprise_results import format_result
 
 
 class SearchResult:
     def __init__(self, search_params=None):
-        self.search_kind = None
+        self.search_client = None
         self.search_params = search_params
         self.results = None
         self.total_results = None
@@ -12,9 +12,10 @@ class SearchResult:
 
     def execute_search(self):
         print("executing search")
-        print("search kind : ", self.search_kind)
 
-        search_results = search_by_ridet(self.search_params)
+        search_results = format_result(self.search_client)
+
+        print("search result in search result service : ", search_results)
 
         self.total_results = len(search_results)
         self.results = search_results

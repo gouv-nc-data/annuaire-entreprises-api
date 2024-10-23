@@ -1,18 +1,8 @@
+from sqlalchemy.orm import Session
 from app.database import models
-from app.database.connection import SessionLocal
 
-db = SessionLocal()
+def search_by_ridet(db: Session, ridet: str):
 
+    Entreprise = models.Entreprise
 
-def search_by_ridet(searchParams):
-    # is_ridet = is_ridet()
-    total_results = 10
-    items = db.query(models.Entreprise).limit(total_results).all()
-    
-
-    results = []
-
-    for item in items:
-        results.append({"entreprise": item.__dict__})
-
-    return results
+    return db.query(Entreprise).filter(Entreprise.rid == ridet).all()

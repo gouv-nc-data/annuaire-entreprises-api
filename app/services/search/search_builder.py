@@ -1,11 +1,19 @@
+from app.database.connection import SessionLocal
 from app.services.search.parsers.ridet import is_ridet
+from app.services.search.queries.search_by_ridet import search_by_ridet
+from app.services.search.queries.search_by_text import search_by_text
+
+db = SessionLocal()
 
 
 def build_search(search_build):
     query_terms = search_build.search_params.terms
-
-    print("query terms : ", query_terms)
+    print("build search query_terms", query_terms)
 
     if is_ridet(query_terms):
-        search_build.search_kind = "ridet"
-        print("query terms are ridet like")
+        print("build search is ridet : ")
+        query_terms_clean = query_terms.replace("", "")
+        search_build.search_client = search_by_ridet(db, query_terms_clean)
+    else:
+        print("build search is text : ")
+        search_build.search_client = search_by_text(db, search_build.search_params)
