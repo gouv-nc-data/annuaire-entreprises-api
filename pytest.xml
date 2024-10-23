@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="1" failures="0" skipped="0" tests="1" time="1.238" timestamp="2024-10-22T05:17:06.476461+00:00" hostname="fv-az2031-287"><testcase classname="" name="tests.test_docs" time="0.000"><error message="collection failure">tests/test_docs.py:2: in &lt;module&gt;
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="1" failures="0" skipped="0" tests="1" time="1.115" timestamp="2024-10-23T00:23:08.258372+00:00" hostname="fv-az1446-71"><testcase classname="" name="tests.test_docs" time="0.000"><error message="collection failure">tests/test_docs.py:2: in &lt;module&gt;
     from main import app
 app/main.py:8: in &lt;module&gt;
     from app.database import models

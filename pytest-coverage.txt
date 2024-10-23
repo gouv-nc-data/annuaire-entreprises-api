@@ -37,19 +37,20 @@ app/routers/public.py                                6      6     0%   1-10
 app/services/build_api_response.py                   9      9     0%   1-23
 app/services/format_search_results.py               21     21     0%   2-49
 app/services/formatters/adresse_complete.py          9      9     0%   1-18
+app/services/formatters/entreprise_results.py        5      5     0%   1-7
 app/services/formatters/nom_complet.py               7      7     0%   1-14
 app/services/search/parsers/ridet.py                 9      9     0%   1-15
-app/services/search/queries/search_by_ridet.py      10     10     0%   1-18
-app/services/search/queries/search_by_text.py        6      6     0%   1-12
-app/services/search/search_builder.py                7      7     0%   1-11
-app/services/search/search_results.py               18     18     0%   1-24
+app/services/search/queries/search_by_ridet.py       5      5     0%   1-8
+app/services/search/queries/search_by_text.py        7      7     0%   1-12
+app/services/search/search_builder.py               14     14     0%   1-19
+app/services/search/search_results.py               18     18     0%   1-25
 app/utils/helpers.py                                24     19    21%   2-3, 7-9, 13-16, 23-25, 29-38
 ------------------------------------------------------------------------------
-TOTAL                                              350    329     6%
+TOTAL                                              358    337     6%
 
 12 files skipped due to complete coverage.
 
 =========================== short test summary info ============================
 ERROR tests/test_docs.py - KeyError: 'DATABASE_URL'
 !!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
-=============================== 1 error in 1.23s ===============================
+=============================== 1 error in 1.11s ===============================
