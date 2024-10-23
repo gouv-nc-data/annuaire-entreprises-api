@@ -1,12 +1,23 @@
+from sqlalchemy.orm import Session
+from sqlalchemy import or_
 from app.database import models
-from app.database.connection import SessionLocal
-
-db = SessionLocal()
 
 
-def search_by_text(searchParams):
-    # is_ridet = is_ridet()
+def search_by_text(db: Session, search_params: str):
 
-    items = db.query(models.Entreprise).limit(10).all()
+    query_terms = search_params.terms
 
-    return items
+    Entreprise = models.Entreprise
+
+    return (
+        db.query(Entreprise)
+        .filter(
+            or_(
+                Entreprise.sigle.icontains(query_terms),
+                Entreprise.enseigne.icontains(query_terms),
+                Entreprise.adresse.icontains(query_terms),
+            )
+        )
+        .distinct()
+        .all()
+    )
