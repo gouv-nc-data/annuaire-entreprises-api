@@ -41,7 +41,6 @@ def format_search_results(results, search_params):
     """Main formatting function for all results."""
     formatted_results = []
     for result in results:
-        print("result in formar search results : ", result)
         # If structure is entreprise
         if "entreprise" in result:
             formatted_result = format_single_entreprise(result, search_params)
