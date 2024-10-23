@@ -12,8 +12,7 @@ def build_search(search_build):
 
     if is_ridet(query_terms):
         print("build search is ridet : ")
-        query_terms_clean = query_terms.replace("", "")
-        search_build.search_client = search_by_ridet(db, query_terms_clean)
+        search_build.search_client = search_by_ridet(query_terms)
     else:
         print("build search is text : ")
-        search_build.search_client = search_by_text(db, search_build.search_params)
+        search_build.search_client = search_by_text(search_build.search_params)

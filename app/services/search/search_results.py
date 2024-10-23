@@ -1,5 +1,11 @@
+from app.database.connection import SessionLocal
+
 from app.services.search.search_builder import build_search
 from app.services.formatters.entreprise_results import format_result
+
+from app.services.search.queries.execute_query import execute_sqlalchemy_query
+
+db = SessionLocal()
 
 
 class SearchResult:
@@ -11,13 +17,13 @@ class SearchResult:
         self.run()
 
     def execute_search(self):
-        print("executing search")
+        sql_alchemy_query = execute_sqlalchemy_query(
+            db, self.search_client, self.search_params
+        )
 
-        search_results = format_result(self.search_client)
+        search_results = format_result(sql_alchemy_query["results"])
 
-        print("search result in search result service : ", search_results)
-
-        self.total_results = len(search_results)
+        self.total_results = sql_alchemy_query["total_results"]
         self.results = search_results
 
     def run(self):
