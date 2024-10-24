@@ -6,7 +6,7 @@ from app.controllers.search_params_model import SearchParams
 from app.controllers.field_validation import VALID_FIELD_VALUES
 
 
-def execute_sqlalchemy_query(db: Session, query, search_params: SearchParams):
+def execute_sqlalchemy_query(db: Session, search_client, search_params: SearchParams):
 
     Entreprise = models.Entreprise
 
@@ -18,7 +18,10 @@ def execute_sqlalchemy_query(db: Session, query, search_params: SearchParams):
         offset = (page - 1) * per_page
 
     try:
-        query = db.query(Entreprise).filter(query)
+        query = db.query(Entreprise)
+
+        if search_client != None:
+            query = db.query(Entreprise).filter(search_client)
 
         for key, value in search_params:
 
