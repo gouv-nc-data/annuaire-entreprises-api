@@ -166,3 +166,23 @@ def test_terms_empty_only(api_response_tester):
         == "3 caractères minimum pour les termes de la requête "
         "(ou utilisez au moins un filtre)"
     )
+
+
+def test_fetch_by_terms_and_filter_by_forme_juridique_and_ville(api_response_tester):
+    """
+    test if searching by specific term and filter by forme_juridique and ville returns the right Ridet as the first search result
+    """
+    path = "recherche?q=r&forme_juridique=voluptates&ville=dunkerque"
+    api_response_tester.test_field_value(path, 0, "ridet", "204663")
+    api_response_tester.test_number_of_results(path, 1)
+
+
+def test_fetch_by_terms_and_filter_by_forme_juridique_and_ville_and_code_postal(
+    api_response_tester,
+):
+    """
+    test if searching by specific term and filter by forme_juridique, ville and code_postal returns the right Ridet as the first search result
+    """
+    path = "recherche?q=r&forme_juridique=voluptates&ville=dunkerque&code_postal=98782"
+    api_response_tester.test_field_value(path, 0, "ridet", "204663")
+    api_response_tester.test_number_of_results(path, 1)
