@@ -16,7 +16,7 @@ class SearchParams(BaseModel):
     terms: str | None = None
     page: int = 1
     per_page: int = 10
-    commune: list | None = None
+    ville: list | None = None
     code_postal: list | None = None
     forme_juridique: list | None = None
 
@@ -56,7 +56,7 @@ class SearchParams(BaseModel):
 
     @field_validator(
         "forme_juridique",
-        "commune",
+        "ville",
         "code_postal",
         mode="before",
     )
@@ -64,7 +64,7 @@ class SearchParams(BaseModel):
         list_of_values = str_to_list(clean_str(str_of_values))
         return list_of_values
 
-    @field_validator("code_postal", "commune", mode="after")
+    @field_validator("code_postal", "ville", mode="after")
     def list_of_values_should_match_regular_expression(
         cls, list_values: list[str], info
     ) -> list[str]:
