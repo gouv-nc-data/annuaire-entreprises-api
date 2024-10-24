@@ -11,13 +11,13 @@ VALID_FIELD_VALUES = {
         "valid_values": FORME_JURIDIQUES,
         "alias": "forme_juridique",
     },
-    "commune": {
-        "valid_values": r"^([013-9]\d|2[AB1-9])\d{3}$",
-        "alias": "commune",
+    "ville": {
+        "valid_values": r"^[a-zA-Z]+$",
+        "alias": "ville",
     },
     "code_postal": {
         "valid_values": r"^((0[1-9])|([1-8][0-9])|(9[0-8])|(2A)|(2B))[0-9]{3}$",
-        "alias": "activite_principale",
+        "alias": "code_postal",
     },
 }
 
