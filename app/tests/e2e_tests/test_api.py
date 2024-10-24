@@ -1,5 +1,3 @@
-import re
-
 import pytest
 
 from app.tests.e2e_tests.resonse_tester import APIResponseTester

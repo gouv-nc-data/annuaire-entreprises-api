@@ -29,8 +29,8 @@ def execute_sqlalchemy_query(db: Session, search_client, search_params: SearchPa
 
             if isinstance(field, dict):
                 alias = field["alias"]
-                if alias != None:
-                    if value != None:
+                if alias is not None:
+                    if value is not None:
                         try:
                             filter_expr = func.upper(getattr(Entreprise, alias)).in_(
                                 value
