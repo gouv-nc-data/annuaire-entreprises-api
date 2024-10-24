@@ -20,7 +20,7 @@ def execute_sqlalchemy_query(db: Session, search_client, search_params: SearchPa
     try:
         query = db.query(Entreprise)
 
-        if not (search_client is None):
+        if search_client is not None:
             query = query.filter(search_client)
 
         for key, value in search_params:
