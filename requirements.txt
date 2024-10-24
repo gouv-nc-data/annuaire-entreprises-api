@@ -1,4 +1,5 @@
 fastapi[standard]
+sentry-sdk[fastapi]
 SQLAlchemy
 orjson
 psycopg2-binary

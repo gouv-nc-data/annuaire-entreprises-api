@@ -5,8 +5,12 @@ from fastapi import FastAPI
 
 from alembic import command
 from alembic.config import Config
+
 from app.database import models
 from app.database.connection import engine
+
+from app.config import Settings
+from app.logging import setup_sentry
 from app.exceptions.exception_handlers import add_exception_handlers
 from app.routers import public
 
@@ -42,7 +46,11 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+if Settings.env == "production":
+    setup_sentry()
+
 models.Base.metadata.create_all(bind=engine)
+
 
 # Include routers
 app.include_router(public.router, prefix="/api/v1")
