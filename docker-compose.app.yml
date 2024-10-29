@@ -1,0 +1,14 @@
+services:
+  annuaire-entreprises-api:
+    container_name: annuaire-entreprises-api
+    platform: linux/amd64 #for platform error on Apple M1 chips
+    env_file: .env
+    build: .
+    environment:
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    ports:
+      - "8080:8080"
+    network_mode: "host"   
+  
