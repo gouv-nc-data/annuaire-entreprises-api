@@ -40,7 +40,7 @@ class Entreprise(Base):
     numero_rcs = Column(String)
     date_immat_rcs = Column(Date)
     date_radiation_rsc = Column(Date)
-    capital_social = Column(Date)
+    capital_social = Column(Integer)
     capital_fixe = Column(Boolean)
     data_cloture_exercice_comptable = Column(String)
     duree_personne_morale = Column(String)
@@ -153,7 +153,7 @@ class IndicateursFinanciers(Base):
 
 
 class Bilan(Base):
-    __tablename__ = "indicateurs_financiers"
+    __tablename__ = "bilan"
 
     id = Column(Integer, primary_key=True)
     comptes_annuels = Column(String)
