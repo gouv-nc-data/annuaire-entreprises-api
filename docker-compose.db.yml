@@ -1,4 +1,3 @@
-
 services:
   recherche-entreprises-db:
     container_name: recherche-entreprises
