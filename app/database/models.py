@@ -23,7 +23,7 @@ class Entreprise(Base):
     ville_postale = Column(String)
     telephone = Column(String)
     email = Column(String)
-    # ape = Column(String) Pourquoi avec le code ET le libellé associé ?
+    ape = Column(String)
     code_ape = Column(String)
     activites_secondaires = Column(String)
     code_nafa = Column(String)
