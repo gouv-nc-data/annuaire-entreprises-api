@@ -2,7 +2,7 @@
 platform linux -- Python 3.10.12, pytest-8.3.3, pluggy-1.5.0
 rootdir: /home/runner/work/annuaire-entreprise-api/annuaire-entreprise-api
 configfile: pytest.ini
-plugins: anyio-4.6.2.post1, cov-5.0.0
+plugins: anyio-4.6.2.post1, cov-6.0.0
 collected 0 items
 
 - generated xml file: /home/runner/work/annuaire-entreprise-api/annuaire-entreprise-api/pytest.xml -
