@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String
 from app.database.connection import Base
 
-from sqlalchemy import Column, String, Integer, Date, Boolean, ForeignKey
+from sqlalchemy import Date, Boolean, ForeignKey
 from typing import List
 from sqlalchemy.orm import relationship, mapped_column
 from sqlalchemy.orm import Mapped
@@ -36,7 +36,7 @@ class Entreprise(Base):
     motif_radiation = Column(String)
     convention_collective = Column(String)
 
-    # Immatriculation RCS
+    # Immatriculation RCS
     numero_rcs = Column(String)
     date_immat_rcs = Column(Date)
     date_radiation_rsc = Column(Date)
@@ -44,30 +44,30 @@ class Entreprise(Base):
     capital_fixe = Column(Boolean)
     data_cloture_exercice_comptable = Column(String)
     duree_personne_morale = Column(String)
-    
+
     # Immatriculation au répertoire des métiers (RM)
     numero_rm = Column(String)
     date_immat_rm = Column(Date)
     date_radiation_rm = Column(Date)
-    
+
     # Immatriculation au registre de l'agriculture et pêche (RAP)
     numero_rap = Column(String)
     date_immat_rap = Column(Date)
     date_radiation_rap = Column(Date)
-    
+
     etablissements: Mapped[List["Etablissement"]] = relationship(
-             back_populates="entreprise", cascade="all, delete-orphan"
-    )
-    
-    dirigeants: Mapped[List["Dirigeant"]] = relationship(
-             back_populates="entreprise", cascade="all, delete-orphan"
-    )
-    
-    indicateurs_financiers: Mapped[List["IndicateursFinanciers"]] = relationship(
-             back_populates="entreprise", cascade="all, delete-orphan"
+        back_populates="entreprise", cascade="all, delete-orphan"
     )
 
-    
+    dirigeants: Mapped[List["Dirigeant"]] = relationship(
+        back_populates="entreprise", cascade="all, delete-orphan"
+    )
+
+    indicateurs_financiers: Mapped[List["IndicateursFinanciers"]] = relationship(
+        back_populates="entreprise", cascade="all, delete-orphan"
+    )
+
+
 class Etablissement(Base):
     __tablename__ = "etablissement"
 
@@ -96,13 +96,13 @@ class Etablissement(Base):
     entreprise_id: Mapped[int] = mapped_column(ForeignKey("entreprise.id"))
 
     entreprise: Mapped["Entreprise"] = relationship(back_populates="etablissements")
-    
+
     dirigeants: Mapped[List["Dirigeant"]] = relationship(
-             back_populates="etablissement", cascade="all, delete-orphan"
+        back_populates="etablissement", cascade="all, delete-orphan"
     )
 
     indicateurs_financiers: Mapped[List["IndicateursFinanciers"]] = relationship(
-             back_populates="etablissement", cascade="all, delete-orphan"
+        back_populates="etablissement", cascade="all, delete-orphan"
     )
 
 
@@ -123,15 +123,17 @@ class Dirigeant(Base):
     situation_matrimoniale = Column(String)
     maitre_apprentissage = Column(String)
     qualifie_dans_son_metier = Column(String)
-    
+
     entreprise_id: Mapped[int] = mapped_column(ForeignKey("entreprise.id"))
 
     entreprise: Mapped["Entreprise"] = relationship(back_populates="dirigeants")
-    
+
     etablissement_id: Mapped[int] = mapped_column(ForeignKey("etablissement.id"))
 
-    etablissement: Mapped["Etablissement"] = relationship(back_populates="indicateurs_financiers")
-    
+    etablissement: Mapped["Etablissement"] = relationship(
+        back_populates="indicateurs_financiers"
+    )
+
 
 class IndicateursFinanciers(Base):
     __tablename__ = "indicateurs_financiers"
@@ -142,14 +144,16 @@ class IndicateursFinanciers(Base):
     marge_brute = Column(Integer)
     excedent_brut_exploitation = Column(Integer)
     resultat_net = Column(Integer)
-    
+
     entreprise_id: Mapped[int] = mapped_column(ForeignKey("entreprise.id"))
 
     entreprise: Mapped["Entreprise"] = relationship(back_populates="dirigeants")
-    
+
     etablissement_id: Mapped[int] = mapped_column(ForeignKey("etablissement.id"))
 
-    etablissement: Mapped["Etablissement"] = relationship(back_populates="indicateurs_financiers")
+    etablissement: Mapped["Etablissement"] = relationship(
+        back_populates="indicateurs_financiers"
+    )
 
 
 class Bilan(Base):
