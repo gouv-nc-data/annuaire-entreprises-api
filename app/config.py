@@ -19,11 +19,11 @@ class SqlAlchemyConfig(ConfigDict):
     database_name: str = config["DATABASE_NAME"] or "postgres"
 
 
-class SentryConfig(ConfigDict):
-    dsn: str = config["SENTRY_DSN"]
+# class SentryConfig(ConfigDict):
+#     dsn: str = config["SENTRY_DSN"]
 
 
 class Settings(ConfigDict):
     sql_alchemy = SqlAlchemyConfig
-    sentry = SentryConfig
+    # sentry = SentryConfig
     env: str = config["ENV"] or "development"
