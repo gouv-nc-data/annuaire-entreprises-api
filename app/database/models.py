@@ -124,11 +124,11 @@ class Dirigeant(Base):
     maitre_apprentissage = Column(String)
     qualifie_dans_son_metier = Column(String)
 
-    entreprise_id: Mapped[int] = mapped_column(ForeignKey("entreprise.id"))
+    entreprise_id: Mapped[int] = mapped_column(ForeignKey("entreprise.id"), nullable=True)
 
     entreprise: Mapped["Entreprise"] = relationship(back_populates="dirigeants")
 
-    etablissement_id: Mapped[int] = mapped_column(ForeignKey("etablissement.id"))
+    etablissement_id: Mapped[int] = mapped_column(ForeignKey("etablissement.id"), nullable=True)
 
     etablissement: Mapped["Etablissement"] = relationship(
         back_populates="indicateurs_financiers"
@@ -145,11 +145,11 @@ class IndicateursFinanciers(Base):
     excedent_brut_exploitation = Column(Integer)
     resultat_net = Column(Integer)
 
-    entreprise_id: Mapped[int] = mapped_column(ForeignKey("entreprise.id"))
+    entreprise_id: Mapped[int] = mapped_column(ForeignKey("entreprise.id"), nullable=True)
 
     entreprise: Mapped["Entreprise"] = relationship(back_populates="dirigeants")
 
-    etablissement_id: Mapped[int] = mapped_column(ForeignKey("etablissement.id"))
+    etablissement_id: Mapped[int] = mapped_column(ForeignKey("etablissement.id"), nullable=True)
 
     etablissement: Mapped["Etablissement"] = relationship(
         back_populates="indicateurs_financiers"
@@ -162,5 +162,5 @@ class Bilan(Base):
     id = Column(Integer, primary_key=True)
     comptes_annuels = Column(String)
     actes = Column(String)
-    entreprise_id: Mapped[int] = mapped_column(ForeignKey("entreprise.id"))
-    etablissement_id: Mapped[int] = mapped_column(ForeignKey("etablissement.id"))
+    entreprise_id: Mapped[int] = mapped_column(ForeignKey("entreprise.id"), nullable=True)
+    etablissement_id: Mapped[int] = mapped_column(ForeignKey("etablissement.id"), nullable=True)
