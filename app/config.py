@@ -26,4 +26,4 @@ class SqlAlchemyConfig(ConfigDict):
 class Settings(ConfigDict):
     sql_alchemy = SqlAlchemyConfig
     # sentry = SentryConfig
-    env: str = config["ENV"] or "development"
+    env: str = "production"  # config["ENV"] or "development"
