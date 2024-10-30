@@ -14,7 +14,46 @@ from app.database.connection import engine
 from app.exceptions.exception_handlers import add_exception_handlers
 from app.routers import public
 
-log = logging.getLogger("uvicorn")
+# ROOT_LEVEL = "DEBUG"
+
+# LOGGING_CONFIG = {
+#     "version": 1,
+#     "disable_existing_loggers": True,
+#     "formatters": {
+#         "standard": {"format": "%(asctime)s [%(levelname)s] %(name)s: %(message)s"},
+#     },
+#     "handlers": {
+#         "default": {
+#             "level": "INFO",
+#             "formatter": "standard",
+#             "class": "logging.StreamHandler",
+#             "stream": "ext://sys.stdout",  # Default is stderr
+#         },
+#     },
+#     "loggers": {
+#         "": {  # root logger
+#             "level": ROOT_LEVEL,
+#             "handlers": ["default"],
+#             "propagate": False,
+#         },
+#         "uvicorn.error": {
+#             "level": "DEBUG",
+#             "handlers": ["default"],
+#         },
+#         "uvicorn.access": {
+#             "level": "DEBUG",
+#             "handlers": ["default"],
+#         },
+#         "alembic": {
+#             "level": "DEBUG",
+#             "handlers": ["default"],
+#         },
+#     },
+# }
+
+# logging.config.dictConfig(LOGGING_CONFIG)
+
+log = logging.getLogger(__name__)
 
 
 def run_migrations():

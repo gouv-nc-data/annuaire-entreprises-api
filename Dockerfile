@@ -15,4 +15,4 @@ COPY app ./app
 COPY alembic.ini .
 COPY alembic ./alembic
 
-CMD ["fastapi", "run", "--workers", "4", "app/main.py", "--proxy-headers", "--port", "8080"]
+CMD ["fastapi", "run", "--workers", "1", "app/main.py", "--proxy-headers", "--port", "8080"]
