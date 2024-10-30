@@ -9,8 +9,8 @@ from alembic.config import Config
 from app.database import models
 from app.database.connection import engine
 
-from app.config import Settings
-from app.logging import setup_sentry
+# from app.config import Settings
+# from app.logging import setup_sentry
 from app.exceptions.exception_handlers import add_exception_handlers
 from app.routers import public
 
