@@ -46,8 +46,8 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-if Settings.env == "production":
-    setup_sentry()
+# if Settings.env == "production":
+#     setup_sentry()
 
 models.Base.metadata.create_all(bind=engine)
 
