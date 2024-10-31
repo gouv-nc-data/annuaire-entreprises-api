@@ -57,8 +57,12 @@ log = logging.getLogger(__name__)
 
 
 def run_migrations():
-    alembic_cfg = Config("alembic.ini")
-    command.upgrade(alembic_cfg, "head")
+    try: 
+        alembic_cfg = Config("alembic.ini")
+        command.upgrade(alembic_cfg, "head")
+    except Exception as e:
+        print(e)
+        raise e
 
 
 @asynccontextmanager
