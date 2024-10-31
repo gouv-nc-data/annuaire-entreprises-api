@@ -7,7 +7,7 @@ from alembic import command
 from alembic.config import Config
 
 from app.database import models
-from app.database.connection import engine
+from app.database.connection import engine, url
 
 # from app.config import Settings
 # from app.logging import setup_sentry
@@ -59,6 +59,7 @@ log = logging.getLogger(__name__)
 def run_migrations():
     try: 
         alembic_cfg = Config("alembic.ini")
+        alembic_cfg.set_main_option("sqlalchemy.url", str(url.render_as_string(hide_password=False)))
         command.upgrade(alembic_cfg, "head")
     except Exception as e:
         print(e)
