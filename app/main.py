@@ -88,6 +88,10 @@ app = FastAPI(
         "url": "https://www.etalab.gouv.fr/wp-content/uploads/2017/04/ETALAB-Licence-Ouverte-v2.0.pdf",
     },
     lifespan=lifespan,
+    openapi_url="/api/v1/openapi.json",
+    docs_url="/api/v1/docs",
+    redoc_url="/api/v1/redoc",
+
 )
 
 # if Settings.env == "production":
