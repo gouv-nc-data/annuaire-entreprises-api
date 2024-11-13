@@ -59,13 +59,13 @@ class Entreprise(Base):
         back_populates="entreprise", cascade="all, delete-orphan"
     )
 
-    dirigeants: Mapped[List["Dirigeant"]] = relationship(
-        back_populates="entreprise", cascade="all, delete-orphan"
-    )
+    # dirigeants: Mapped[List["Dirigeant"]] = relationship(
+    #     back_populates="entreprise", cascade="all, delete-orphan"
+    # )
 
-    indicateurs_financiers: Mapped[List["IndicateursFinanciers"]] = relationship(
-        back_populates="entreprise", cascade="all, delete-orphan"
-    )
+    # indicateurs_financiers: Mapped[List["IndicateursFinanciers"]] = relationship(
+    #     back_populates="entreprise", cascade="all, delete-orphan"
+    # )
 
 
 class Etablissement(Base):
@@ -97,63 +97,63 @@ class Etablissement(Base):
 
     entreprise: Mapped["Entreprise"] = relationship(back_populates="etablissements")
 
-    dirigeants: Mapped[List["Dirigeant"]] = relationship(
-        back_populates="etablissement", cascade="all, delete-orphan"
-    )
+    # dirigeants: Mapped[List["Dirigeant"]] = relationship(
+    #     back_populates="etablissement", cascade="all, delete-orphan"
+    # )
 
-    indicateurs_financiers: Mapped[List["IndicateursFinanciers"]] = relationship(
-        back_populates="etablissement", cascade="all, delete-orphan"
-    )
-
-
-class Dirigeant(Base):
-    __tablename__ = "dirigeant"
-
-    id = Column(Integer, primary_key=True)
-    role = Column(String)
-    nom = Column(String)
-    date_naissance = Column(String)
-    nationalite = Column(String)
-    adresse = Column(String)
-    code_postal = Column(String)
-    ville = Column(String)
-    titre_cma = Column(String)
-    date_de_fonction_rm = Column(Date)
-    date_de_fonction_ra = Column(Date)
-    situation_matrimoniale = Column(String)
-    maitre_apprentissage = Column(String)
-    qualifie_dans_son_metier = Column(String)
-
-    entreprise_id: Mapped[int] = mapped_column(ForeignKey("entreprise.id"), nullable=True)
-
-    entreprise: Mapped["Entreprise"] = relationship(back_populates="dirigeants")
-
-    etablissement_id: Mapped[int] = mapped_column(ForeignKey("etablissement.id"), nullable=True)
-
-    etablissement: Mapped["Etablissement"] = relationship(
-        back_populates="indicateurs_financiers"
-    )
+    # indicateurs_financiers: Mapped[List["IndicateursFinanciers"]] = relationship(
+    #     back_populates="etablissement", cascade="all, delete-orphan"
+    # )
 
 
-class IndicateursFinanciers(Base):
-    __tablename__ = "indicateurs_financiers"
+# class Dirigeant(Base):
+#     __tablename__ = "dirigeant"
 
-    id = Column(Integer, primary_key=True)
-    date_cloture = Column(Date)
-    chiffre_affaire = Column(Integer)
-    marge_brute = Column(Integer)
-    excedent_brut_exploitation = Column(Integer)
-    resultat_net = Column(Integer)
+#     id = Column(Integer, primary_key=True)
+#     role = Column(String)
+#     nom = Column(String)
+#     date_naissance = Column(String)
+#     nationalite = Column(String)
+#     adresse = Column(String)
+#     code_postal = Column(String)
+#     ville = Column(String)
+#     titre_cma = Column(String)
+#     date_de_fonction_rm = Column(Date)
+#     date_de_fonction_ra = Column(Date)
+#     situation_matrimoniale = Column(String)
+#     maitre_apprentissage = Column(String)
+#     qualifie_dans_son_metier = Column(String)
 
-    entreprise_id: Mapped[int] = mapped_column(ForeignKey("entreprise.id"), nullable=True)
+#     entreprise_id: Mapped[int] = mapped_column(ForeignKey("entreprise.id"), nullable=True)
 
-    entreprise: Mapped["Entreprise"] = relationship(back_populates="dirigeants")
+#     entreprise: Mapped["Entreprise"] = relationship(back_populates="dirigeants")
 
-    etablissement_id: Mapped[int] = mapped_column(ForeignKey("etablissement.id"), nullable=True)
+#     etablissement_id: Mapped[int] = mapped_column(ForeignKey("etablissement.id"), nullable=True)
 
-    etablissement: Mapped["Etablissement"] = relationship(
-        back_populates="indicateurs_financiers"
-    )
+#     etablissement: Mapped["Etablissement"] = relationship(
+#         back_populates="indicateurs_financiers"
+#     )
+
+
+# class IndicateursFinanciers(Base):
+#     __tablename__ = "indicateurs_financiers"
+
+#     id = Column(Integer, primary_key=True)
+#     date_cloture = Column(Date)
+#     chiffre_affaire = Column(Integer)
+#     marge_brute = Column(Integer)
+#     excedent_brut_exploitation = Column(Integer)
+#     resultat_net = Column(Integer)
+
+#     entreprise_id: Mapped[int] = mapped_column(ForeignKey("entreprise.id"), nullable=True)
+
+#     entreprise: Mapped["Entreprise"] = relationship(back_populates="dirigeants")
+
+#     etablissement_id: Mapped[int] = mapped_column(ForeignKey("etablissement.id"), nullable=True)
+
+#     etablissement: Mapped["Etablissement"] = relationship(
+#         back_populates="indicateurs_financiers"
+#     )
 
 
 class Bilan(Base):
@@ -162,5 +162,9 @@ class Bilan(Base):
     id = Column(Integer, primary_key=True)
     comptes_annuels = Column(String)
     actes = Column(String)
-    entreprise_id: Mapped[int] = mapped_column(ForeignKey("entreprise.id"), nullable=True)
-    etablissement_id: Mapped[int] = mapped_column(ForeignKey("etablissement.id"), nullable=True)
+    entreprise_id: Mapped[int] = mapped_column(
+        ForeignKey("entreprise.id"), nullable=True
+    )
+    etablissement_id: Mapped[int] = mapped_column(
+        ForeignKey("etablissement.id"), nullable=True
+    )
