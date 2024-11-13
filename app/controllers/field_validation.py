@@ -13,7 +13,7 @@ VALID_FIELD_VALUES = {
     },
     "ville": {
         "valid_values": r"^[a-zA-Z]+$",
-        "alias": "ville",
+        "alias": "ville_physique",
     },
     "code_postal": {
         "valid_values": r"^((0[1-9])|([1-8][0-9])|(9[0-8])|(2A)|(2B))[0-9]{3}$",

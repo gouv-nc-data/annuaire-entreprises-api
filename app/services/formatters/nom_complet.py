@@ -1,14 +1,15 @@
 def format_nom_complet(
     enseigne=None,
-    sigle=None,
+    designation=None,
 ):
-    if not enseigne:
-        return None
 
-    nom_complet = enseigne
+    if not designation:
+        nom_complet = ""
+    else:
+        nom_complet = designation
 
     # Add sigle if it exists
-    if sigle:
-        nom_complet += f" ({sigle})"
+    if enseigne:
+        nom_complet += f" ({enseigne})"
 
     return nom_complet.upper()
