@@ -7,8 +7,6 @@ from app.services.formatters.date import format_date
 def format_single_entreprise(result, search_params):
     result_entreprise = result["entreprise"]
 
-    print("result entreprise ", result_entreprise)
-
     def get_field(field, default=None):
         value = result_entreprise.get(field, default)
         if value is None:
@@ -37,8 +35,6 @@ def format_single_entreprise(result, search_params):
         "date_creation": format_date(get_field("date_creation")),
         "date_radiation": format_date(get_field("date_radiation")),
     }
-
-    print("entreprise field : ", entreprise_fields)
 
     formatted_entreprise = EntrepriseResponse(**entreprise_fields)
 
