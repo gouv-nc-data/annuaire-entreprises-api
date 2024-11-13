@@ -2,12 +2,17 @@ import re
 
 from pydantic import BaseModel, field_validator, model_validator
 
-from app.controllers.field_validation import (FIELD_LENGTHS,
-                                              NUMERIC_FIELD_LIMITS,
-                                              VALID_FIELD_VALUES)
+from app.controllers.field_validation import (
+    FIELD_LENGTHS,
+    NUMERIC_FIELD_LIMITS,
+    VALID_FIELD_VALUES,
+)
 from app.exceptions.exceptions import InvalidParamError
-from app.utils.helpers import (check_params_are_none_except_excluded,
-                               clean_str, str_to_list)
+from app.utils.helpers import (
+    check_params_are_none_except_excluded,
+    clean_str,
+    str_to_list,
+)
 
 
 class SearchParams(BaseModel):
@@ -55,13 +60,20 @@ class SearchParams(BaseModel):
         return value.upper()
 
     @field_validator(
-        "forme_juridique",
         "ville",
         "code_postal",
         mode="before",
     )
-    def convert_str_to_list(cls, str_of_values: str) -> list[str]:
+    def convert_str_to_upper_list(cls, str_of_values: str) -> list[str]:
         list_of_values = str_to_list(clean_str(str_of_values))
+        return list_of_values
+
+    @field_validator(
+        "forme_juridique",
+        mode="before",
+    )
+    def convert_str_to_list(cls, str_of_values: str) -> list[str]:
+        list_of_values = str_to_list(str_of_values.upper())
         return list_of_values
 
     @field_validator("code_postal", "ville", mode="after")
@@ -82,6 +94,10 @@ class SearchParams(BaseModel):
         mode="after",
     )
     def list_of_values_must_be_valid(cls, list_of_values: list[str], info) -> list[str]:
+
+        print("list of values :", list_of_values)
+        print("info :", info)
+
         valid_values = VALID_FIELD_VALUES.get(info.field_name)["valid_values"]
         for value in list_of_values:
             if value not in valid_values:
