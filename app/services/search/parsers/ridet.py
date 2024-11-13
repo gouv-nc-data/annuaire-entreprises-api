@@ -9,7 +9,7 @@ def is_ridet(query_string: str) -> bool:
         return False
     clean_query_string = query_string.replace(" ", "")
     # TODO might change this regex for correct ridet length
-    ridet_valides = r"\b\d{6}\b"
+    ridet_valides = r"\b\d{7}\b"
     if re.search(ridet_valides, clean_query_string):
         return True
     return False
