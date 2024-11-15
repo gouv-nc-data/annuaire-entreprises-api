@@ -1,7 +1,7 @@
-
 from app.models.entreprise import EntrepriseResponse
 from app.services.formatters.adresse_complete import format_adresse_complete
 from app.services.formatters.nom_complet import format_nom_complet
+from app.services.formatters.date import format_date
 
 
 def format_single_entreprise(result, search_params):
@@ -16,20 +16,24 @@ def format_single_entreprise(result, search_params):
     entreprise_fields = {
         "ridet": get_field("rid"),
         "nom_complet": format_nom_complet(
+            get_field("designation"),
             get_field("enseigne"),
-            get_field("sigle"),
         ),
         "enseigne": get_field("enseigne"),
-        "sigle": get_field("sigle"),
+        "designation": get_field("designation"),
         "adresse_complete": format_adresse_complete(
-            get_field("adresse"),
-            get_field("ville"),
-            get_field("code_postal"),
+            get_field("adresse_physique"),
+            get_field("ville_physique"),
+            get_field("code_postal_physique"),
         ),
-        "adresse": get_field("adresse"),
-        "ville": get_field("ville"),
-        "code_postal": get_field("code_postal"),
+        "adresse_physique": get_field("adresse_physique"),
+        "ville_physique": get_field("ville_physique"),
+        "code_postal_physique": get_field("code_postal_physique"),
         "forme_juridique": get_field("forme_juridique"),
+        "ape": get_field("ape"),
+        "code_ape": get_field("code_ape"),
+        "date_creation": format_date(get_field("date_creation")),
+        "date_radiation": format_date(get_field("date_radiation")),
     }
 
     formatted_entreprise = EntrepriseResponse(**entreprise_fields)

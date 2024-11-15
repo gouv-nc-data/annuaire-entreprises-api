@@ -10,7 +10,7 @@ def search_by_text(search_params: SearchParams):
     Entreprise = models.Entreprise
 
     return or_(
-        Entreprise.sigle.icontains(query_terms),
+        Entreprise.designation.icontains(query_terms),
         Entreprise.enseigne.icontains(query_terms),
-        Entreprise.adresse.icontains(query_terms),
+        Entreprise.adresse_physique.icontains(query_terms),
     )
