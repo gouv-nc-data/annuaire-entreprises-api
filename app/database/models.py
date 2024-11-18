@@ -11,7 +11,9 @@ class Entreprise(Base):
     __tablename__ = "entreprise"
 
     id = Column(Integer, primary_key=True)
+    etat_inscription = Column(String)
     rid = Column(String, unique=True)
+    etat_rid = Column(String)  # I=Inscrit R=Radié S=sommeil
     designation = Column(String)
     enseigne = Column(String)
     forme_juridique = Column(String)
@@ -35,6 +37,8 @@ class Entreprise(Base):
     date_radiation = Column(Date)
     motif_radiation = Column(String)
     convention_collective = Column(String)
+    situation_entreprise = Column(String)
+    
 
     # Immatriculation RCS
     numero_rcs = Column(String)
@@ -59,9 +63,9 @@ class Entreprise(Base):
         back_populates="entreprise", cascade="all, delete-orphan"
     )
 
-    # dirigeants: Mapped[List["Dirigeant"]] = relationship(
-    #     back_populates="entreprise", cascade="all, delete-orphan"
-    # )
+    dirigeants: Mapped[List["Dirigeant"]] = relationship(
+        back_populates="entreprise", cascade="all, delete-orphan"
+    )
 
     # indicateurs_financiers: Mapped[List["IndicateursFinanciers"]] = relationship(
     #     back_populates="entreprise", cascade="all, delete-orphan"
@@ -77,7 +81,7 @@ class Etablissement(Base):
     ridet = Column(String)
     designation = Column(String)
     enseigne = Column(String)
-    # ape = Column(String) Pourquoi avec le code ET le libellé associé ?
+    ape = Column(String)
     code_ape = Column(String)
     activites_secondaires = Column(String)
     code_nafa = Column(String)
@@ -97,42 +101,42 @@ class Etablissement(Base):
 
     entreprise: Mapped["Entreprise"] = relationship(back_populates="etablissements")
 
-    # dirigeants: Mapped[List["Dirigeant"]] = relationship(
-    #     back_populates="etablissement", cascade="all, delete-orphan"
-    # )
+    dirigeants: Mapped[List["Dirigeant"]] = relationship(
+        back_populates="etablissement", cascade="all, delete-orphan"
+    )
 
     # indicateurs_financiers: Mapped[List["IndicateursFinanciers"]] = relationship(
     #     back_populates="etablissement", cascade="all, delete-orphan"
     # )
 
 
-# class Dirigeant(Base):
-#     __tablename__ = "dirigeant"
+class Dirigeant(Base):
+    __tablename__ = "dirigeant"
 
-#     id = Column(Integer, primary_key=True)
-#     role = Column(String)
-#     nom = Column(String)
-#     date_naissance = Column(String)
-#     nationalite = Column(String)
-#     adresse = Column(String)
-#     code_postal = Column(String)
-#     ville = Column(String)
-#     titre_cma = Column(String)
-#     date_de_fonction_rm = Column(Date)
-#     date_de_fonction_ra = Column(Date)
-#     situation_matrimoniale = Column(String)
-#     maitre_apprentissage = Column(String)
-#     qualifie_dans_son_metier = Column(String)
+    id = Column(Integer, primary_key=True)
+    role = Column(String)
+    nom = Column(String)
+    date_naissance = Column(String)
+    nationalite = Column(String)
+    adresse = Column(String)
+    code_postal = Column(String)
+    ville = Column(String)
+    titre_cma = Column(String)
+    date_de_fonction_rm = Column(Date)
+    date_de_fonction_ra = Column(Date)
+    situation_matrimoniale = Column(String)
+    maitre_apprentissage = Column(String)
+    qualifie_dans_son_metier = Column(String)
 
-#     entreprise_id: Mapped[int] = mapped_column(ForeignKey("entreprise.id"), nullable=True)
+    entreprise_id: Mapped[int] = mapped_column(ForeignKey("entreprise.id"), nullable=True)
 
-#     entreprise: Mapped["Entreprise"] = relationship(back_populates="dirigeants")
+    entreprise: Mapped["Entreprise"] = relationship(back_populates="dirigeants")
 
-#     etablissement_id: Mapped[int] = mapped_column(ForeignKey("etablissement.id"), nullable=True)
+    etablissement_id: Mapped[int] = mapped_column(ForeignKey("etablissement.id"), nullable=True)
 
-#     etablissement: Mapped["Etablissement"] = relationship(
-#         back_populates="indicateurs_financiers"
-#     )
+    etablissement: Mapped["Etablissement"] = relationship(
+        back_populates="indicateurs_financiers"
+    )
 
 
 # class IndicateursFinanciers(Base):
