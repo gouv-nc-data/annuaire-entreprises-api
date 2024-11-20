@@ -22,15 +22,15 @@ def execute_sqlalchemy_query(db: Session, search_client, search_params: SearchPa
     try:
         stmt = (
             select(Entreprise)
-            .join(Dirigeant)
-            # .join(Etablissement)
+            .join(Dirigeant, Entreprise.id == Dirigeant.entreprise_id)
+            .join(Etablissement, Entreprise.id == Etablissement.entreprise_id)
             .options(joinedload("*"))
         )
 
         count_stmt = (
             select(func.count(func.distinct(Entreprise.id)))
-            .join(Dirigeant)
-            # .join(Etablissement)
+            .join(Dirigeant, Entreprise.id == Dirigeant.entreprise_id)
+            .join(Etablissement, Entreprise.id == Etablissement.entreprise_id)
             .options(joinedload("*"))
         )
 
