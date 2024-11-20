@@ -1,4 +1,4 @@
-from app.labels.helpers import FORME_JURIDIQUES
+from app.labels.helpers import CODES_NAF, FORME_JURIDIQUES
 
 NUMERIC_FIELD_LIMITS = {
     "page": {"min": 1, "max": 1000, "default": 1, "alias": "page"},
@@ -18,6 +18,10 @@ VALID_FIELD_VALUES = {
     "code_postal": {
         "valid_values": r"^((0[1-9])|([1-8][0-9])|(9[0-8])|(2A)|(2B))[0-9]{3}$",
         "alias": "code_postal",
+    },
+    "activite_principale": {
+        "valid_values": CODES_NAF,
+        "alias": "activite_principale",
     },
 }
 

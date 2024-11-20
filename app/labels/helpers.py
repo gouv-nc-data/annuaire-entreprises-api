@@ -5,6 +5,7 @@ import app.labels as labels_package
 
 # List of module names to import
 file_modules = [
+    "codes-NAF",
     "forme-juridiques",
 ]
 
@@ -23,3 +24,5 @@ loaded_files = {
 
 # Accessing the data
 FORME_JURIDIQUES = loaded_files["FORME-JURIDIQUES"]
+CODES_NAF = loaded_files["CODES-NAF"]
+

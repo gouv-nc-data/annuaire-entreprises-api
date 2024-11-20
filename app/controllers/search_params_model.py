@@ -24,6 +24,7 @@ class SearchParams(BaseModel):
     ville: list | None = None
     code_postal: list | None = None
     forme_juridique: list | None = None
+    activite_principale: list | None = None
 
     # Field Validators (involve one field at a time)
     @field_validator("page", "per_page", mode="before")
@@ -62,6 +63,7 @@ class SearchParams(BaseModel):
     @field_validator(
         "ville",
         "code_postal",
+        "activite_principale",
         mode="before",
     )
     def convert_str_to_upper_list(cls, str_of_values: str) -> list[str]:
@@ -91,13 +93,10 @@ class SearchParams(BaseModel):
 
     @field_validator(
         "forme_juridique",
+        "activite_principale",
         mode="after",
     )
     def list_of_values_must_be_valid(cls, list_of_values: list[str], info) -> list[str]:
-
-        print("list of values :", list_of_values)
-        print("info :", info)
-
         valid_values = VALID_FIELD_VALUES.get(info.field_name)["valid_values"]
         for value in list_of_values:
             if value not in valid_values:
