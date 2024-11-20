@@ -9,6 +9,7 @@ from app.controllers.field_validation import VALID_FIELD_VALUES
 def execute_sqlalchemy_query(db: Session, search_client, search_params: SearchParams):
 
     Entreprise = models.Entreprise
+    Dirigeant = models.Dirigeant
 
     page = search_params.page
     per_page = search_params.per_page
@@ -18,7 +19,7 @@ def execute_sqlalchemy_query(db: Session, search_client, search_params: SearchPa
         offset = (page - 1) * per_page
 
     try:
-        query = db.query(Entreprise)
+        query = db.query(Entreprise).join(Dirigeant)
 
         if search_client is not None:
             query = query.filter(search_client)
