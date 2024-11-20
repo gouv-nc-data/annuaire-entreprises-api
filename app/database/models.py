@@ -135,7 +135,7 @@ class Dirigeant(Base):
     etablissement_id: Mapped[int] = mapped_column(ForeignKey("etablissement.id"), nullable=True)
 
     etablissement: Mapped["Etablissement"] = relationship(
-        back_populates="indicateurs_financiers"
+        back_populates="dirigeants"
     )
 
 

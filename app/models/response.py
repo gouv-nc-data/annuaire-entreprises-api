@@ -1,10 +1,10 @@
 from pydantic import BaseModel
 
-from app.models.entreprise import EntrepriseResponse
+from app.models.unite_legale import UniteLegaleResponse
 
 
 class ResponseModel(BaseModel):
-    results: list[EntrepriseResponse] | None = None
+    results: list[UniteLegaleResponse] | None = None
     total_results: int = None
     page: int = None
     per_page: int = None

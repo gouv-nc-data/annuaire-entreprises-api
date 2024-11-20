@@ -1,4 +1,4 @@
-from app.models.entreprise import EntrepriseResponse
+from app.models.unite_legale import UniteLegaleResponse
 from app.services.formatters.adresse_complete import format_adresse_complete
 from app.services.formatters.nom_complet import format_nom_complet
 from app.services.formatters.date import format_date
@@ -36,7 +36,7 @@ def format_single_entreprise(result, search_params):
         "date_radiation": format_date(get_field("date_radiation")),
     }
 
-    formatted_entreprise = EntrepriseResponse(**entreprise_fields)
+    formatted_entreprise = UniteLegaleResponse(**entreprise_fields)
 
     return formatted_entreprise
 

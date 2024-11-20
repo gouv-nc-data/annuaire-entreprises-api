@@ -1,7 +1,43 @@
 from pydantic import BaseModel
 
+class Etablissement(BaseModel):
+    type_etablissement: str | None = None
+    situation: str | None = None
+    ridet: str | None = None
+    designation: str | None = None
+    enseigne: str | None = None
+    ape: str | None = None
+    code_ape: str | None = None
+    activites_secondaires: str | None = None
+    code_nafa: str | None = None
+    code_nafa_secondaires: str | None = None
+    adresse_physique: str | None = None
+    code_postal_physique: str | None = None
+    ville_physique: str | None = None
+    adresse_postale: str | None = None
+    code_postal_postale: str | None = None
+    ville_postale: str | None = None
+    date_creation: str | None = None
+    date_debut_activite: str | None = None
+    date_fin_activite: str | None = None
+    convention_collective: str | None = None
 
-class EntrepriseResponse(BaseModel):
+class Dirigeant(BaseModel):
+    role: str | None = None
+    nom: str | None = None
+    date_naissance: str | None = None
+    nationalite: str | None = None
+    adresse: str | None = None
+    code_postal: str | None = None
+    ville: str | None = None
+    titre_cma: str | None = None
+    date_de_fonction_rm: str | None = None
+    date_de_fonction_ra: str | None = None
+    situation_matrimoniale: str | None = None
+    maitre_apprentissage: str | None = None
+    qualifie_dans_son_metier: str | None = None
+
+class UniteLegaleResponse(BaseModel):
     nom_complet: str | None = None
     ridet: str | None = None
     designation: str | None = None
@@ -48,14 +84,5 @@ class EntrepriseResponse(BaseModel):
     date_immat_rap: str | None = None
     date_radiation_rap: str | None = None
 
-    # etablissements: Mapped[List["Etablissement"]] = relationship(
-    #     back_populates="entreprise", cascade="all, delete-orphan"
-    # )
-
-    # dirigeants: Mapped[List["Dirigeant"]] = relationship(
-    #     back_populates="entreprise", cascade="all, delete-orphan"
-    # )
-
-    # indicateurs_financiers: Mapped[List["IndicateursFinanciers"]] = relationship(
-    #     back_populates="entreprise", cascade="all, delete-orphan"
-    # )
+    etablissements: list[Etablissement] | None = None
+    dirigeants: list[Dirigeant] | None = None
