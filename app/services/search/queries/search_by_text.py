@@ -9,10 +9,14 @@ def search_by_text(search_params: SearchParams):
 
     Entreprise = models.Entreprise
     Dirigeant = models.Dirigeant
+    Etablissement = models.Etablissement
 
     return or_(
         Entreprise.designation.icontains(query_terms),
         Entreprise.enseigne.icontains(query_terms),
         Entreprise.adresse_physique.icontains(query_terms),
         Dirigeant.nom.icontains(query_terms),
+        # Etablissement.designation.icontains(query_terms),
+        # Etablissement.enseigne.icontains(query_terms),
+        # Etablissement.adresse_physique.icontains(query_terms),
     )

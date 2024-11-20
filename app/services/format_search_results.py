@@ -2,6 +2,8 @@ from app.models.unite_legale import UniteLegaleResponse
 from app.services.formatters.adresse_complete import format_adresse_complete
 from app.services.formatters.nom_complet import format_nom_complet
 from app.services.formatters.date import format_date
+from app.services.formatters.dirigeants import format_dirigeants
+from app.services.formatters.etablissements import format_etablissements
 
 
 def format_single_entreprise(result, search_params):
@@ -34,6 +36,9 @@ def format_single_entreprise(result, search_params):
         "code_ape": get_field("code_ape"),
         "date_creation": format_date(get_field("date_creation")),
         "date_radiation": format_date(get_field("date_radiation")),
+        # Relations
+        "dirigeants": format_dirigeants(get_field("dirigeants")),
+        "etablissements": format_etablissements(get_field("etablissements")),
     }
 
     formatted_entreprise = UniteLegaleResponse(**entreprise_fields)

@@ -1,5 +1,5 @@
-from sqlalchemy import func
-from sqlalchemy.orm import Session
+from sqlalchemy import func, select
+from sqlalchemy.orm import Session, joinedload
 from app.database import models
 
 from app.controllers.search_params_model import SearchParams
@@ -10,6 +10,7 @@ def execute_sqlalchemy_query(db: Session, search_client, search_params: SearchPa
 
     Entreprise = models.Entreprise
     Dirigeant = models.Dirigeant
+    Etablissement = models.Etablissement
 
     page = search_params.page
     per_page = search_params.per_page
@@ -19,10 +20,23 @@ def execute_sqlalchemy_query(db: Session, search_client, search_params: SearchPa
         offset = (page - 1) * per_page
 
     try:
-        query = db.query(Entreprise).join(Dirigeant)
+        stmt = (
+            select(Entreprise)
+            .join(Dirigeant)
+            # .join(Etablissement)
+            .options(joinedload("*"))
+        )
+
+        count_stmt = (
+            select(func.count(func.distinct(Entreprise.id)))
+            .join(Dirigeant)
+            # .join(Etablissement)
+            .options(joinedload("*"))
+        )
 
         if search_client is not None:
-            query = query.filter(search_client)
+            stmt = stmt.filter(search_client)
+            count_stmt = count_stmt.filter(search_client)
 
         for key, value in search_params:
 
@@ -36,16 +50,17 @@ def execute_sqlalchemy_query(db: Session, search_client, search_params: SearchPa
                             filter_expr = func.upper(getattr(Entreprise, alias)).in_(
                                 value
                             )
-                            query = query.filter(filter_expr)
+                            stmt = stmt.filter(filter_expr)
+                            count_stmt = count_stmt.filter(filter_expr)
                         except Exception as e:
                             print("Filtering regex in sql alchemy is wrong...", e)
 
-        total_results = query.count()
+        total_results = db.execute(count_stmt).scalar_one()
 
     except Exception as e:
         print("something went wrong in sql alchemy searching...", e)
     finally:
         return {
             "total_results": total_results,
-            "results": query.offset(offset).limit(per_page).distinct().all(),
+            "results": db.scalars(stmt.offset(offset).limit(per_page)).unique().all(),
         }
