@@ -8,6 +8,6 @@ def format_date(date=None):
     if not date:
         return None
 
-    string_date = date.strftime("%d %B %Y")
+    string_date = str(date)
 
     return string_date
