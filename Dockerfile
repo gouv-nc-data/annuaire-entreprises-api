@@ -15,4 +15,12 @@ COPY app ./app
 COPY alembic.ini .
 COPY alembic ./alembic
 
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y locales
+
+RUN sed -i -e 's/# en_US.UTF-8 UTF-8/fr_FR.UTF-8 UTF-8/' /etc/locale.gen && \
+    dpkg-reconfigure --frontend=noninteractive locales && \
+    update-locale LANG=fr_FR.UTF-8
+
+ENV LANG fr_FR.UTF-8
+
 CMD ["fastapi", "run", "--workers", "1", "app/main.py", "--proxy-headers", "--port", "8080"]
