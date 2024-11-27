@@ -4,7 +4,8 @@ from pydantic import BaseModel
 class Etablissement(BaseModel):
     type_etablissement: str | None = None
     situation: str | None = None
-    ridet: str | None = None
+    rid: str | None = None
+    et: str | None = None
     designation: str | None = None
     enseigne: str | None = None
     ape: str | None = None
@@ -42,7 +43,7 @@ class Dirigeant(BaseModel):
 
 class UniteLegaleResponse(BaseModel):
     nom_complet: str | None = None
-    ridet: str | None = None
+    rid: str | None = None
     designation: str | None = None
     enseigne: str | None = None
     forme_juridique: str | None = None

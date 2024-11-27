@@ -7,7 +7,7 @@ from app.tests.e2e_tests.resonse_tester import APIResponseTester
 
 fake_entreprise = {
     "nom_complet": "GUILLOT SA (MOULIN ET ROBERT)",
-    "ridet": "984766",
+    "rid": "984766",
     "sigle": "Moulin et Robert",
     "enseigne": "Guillot SA",
     "forme_juridique": "voluptates",

@@ -16,12 +16,12 @@ class SearchApiError(Exception):
         super().__init__(self.message, self.name)
 
 
-class InvalidRidetError(SearchApiError):
-    """Custom exception for invalid RIDET number"""
+class InvalidRidError(SearchApiError):
+    """Custom exception for invalid RID number"""
 
     def __init__(self):
         super().__init__(
-            message="Numéro Ridet invalide.",
+            message="Numéro Rid invalide.",
             name="",
             status_code=status.HTTP_400_BAD_REQUEST,
         )

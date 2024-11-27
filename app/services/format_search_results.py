@@ -18,7 +18,7 @@ def format_single_entreprise(result, search_params):
         return value
 
     entreprise_fields = {
-        "ridet": get_field("rid"),
+        "rid": get_field("rid"),
         "nom_complet": format_nom_complet(
             get_field("designation"),
             get_field("enseigne"),
