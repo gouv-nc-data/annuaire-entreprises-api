@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 
+
 class Etablissement(BaseModel):
     type_etablissement: str | None = None
     situation: str | None = None
@@ -22,6 +23,7 @@ class Etablissement(BaseModel):
     date_fin_activite: str | None = None
     convention_collective: str | None = None
 
+
 class Dirigeant(BaseModel):
     role: str | None = None
     nom: str | None = None
@@ -36,6 +38,7 @@ class Dirigeant(BaseModel):
     situation_matrimoniale: str | None = None
     maitre_apprentissage: str | None = None
     qualifie_dans_son_metier: str | None = None
+
 
 class UniteLegaleResponse(BaseModel):
     nom_complet: str | None = None
@@ -64,6 +67,8 @@ class UniteLegaleResponse(BaseModel):
     date_radiation: str | None = None
     motif_radiation: str | None = None
     convention_collective: str | None = None
+    situation_entreprise: str | None = None
+    etat_rid: str | None = None
 
     # Immatriculation RCS
     numero_rcs: str | None = None
