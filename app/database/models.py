@@ -140,21 +140,21 @@ class Dirigeant(Base):
     )
 
 
-# class IndicateursFinanciers(Base):
-#     __tablename__ = "indicateurs_financiers"
+class IndicateursFinanciers(Base):
+    __tablename__ = "indicateurs_financiers"
 
-#     id = Column(Integer, primary_key=True)
-#     date_cloture = Column(Date)
-#     chiffre_affaire = Column(Integer)
-#     marge_brute = Column(Integer)
-#     excedent_brut_exploitation = Column(Integer)
-#     resultat_net = Column(Integer)
+    id = Column(Integer, primary_key=True)
+    date_cloture = Column(Date)
+    chiffre_affaire = Column(Integer)
+    marge_brute = Column(Integer)
+    excedent_brut_exploitation = Column(Integer)
+    resultat_net = Column(Integer)
 
-#     entreprise_id: Mapped[int] = mapped_column(ForeignKey("entreprise.id"), nullable=True)
+    entreprise_id: Mapped[int] = mapped_column(ForeignKey("entreprise.id"), nullable=True)
 
 #     entreprise: Mapped["Entreprise"] = relationship(back_populates="dirigeants")
 
-#     etablissement_id: Mapped[int] = mapped_column(ForeignKey("etablissement.id"), nullable=True)
+    etablissement_id: Mapped[int] = mapped_column(ForeignKey("etablissement.id"), nullable=True)
 
 #     etablissement: Mapped["Etablissement"] = relationship(
 #         back_populates="indicateurs_financiers"
