@@ -1,5 +1,6 @@
 from app.models.unite_legale import Etablissement
 from app.utils.helpers import get_value
+from app.services.formatters.rid import format_ridet
 
 
 def format_etablissements(etablissements=None):
@@ -15,6 +16,10 @@ def format_etablissements(etablissements=None):
                 type_etablissement=get_value(etablissement, "type_etablissement"),
                 situation=get_value(etablissement, "situation"),
                 rid=get_value(etablissement, "rid"),
+                et=get_value(etablissement, "et"),
+                ridet=format_ridet(
+                    get_value(etablissement, "rid"), get_value(etablissement, "et")
+                ),
                 designation=get_value(etablissement, "designation"),
                 enseigne=get_value(etablissement, "enseigne"),
                 ape=get_value(etablissement, "ape"),

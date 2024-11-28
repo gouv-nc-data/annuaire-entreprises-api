@@ -6,6 +6,7 @@ class Etablissement(BaseModel):
     situation: str | None = None
     rid: str | None = None
     et: str | None = None
+    ridet: str | None = None
     designation: str | None = None
     enseigne: str | None = None
     ape: str | None = None
