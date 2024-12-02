@@ -15,7 +15,7 @@ class Entreprise(Base):
     rid = Column(String, unique=True)
     etat_rid = Column(String)  # I=Inscrit R=Radié S=sommeil
     designation = Column(String)
-    enseigne = Column(String)
+    sigle = Column(String)
     forme_juridique = Column(String)
     adresse_physique = Column(String)
     code_postal_physique = Column(String)
