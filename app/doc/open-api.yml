@@ -1,0 +1,141 @@
+info:
+  title: API Recherche d’entreprises
+  version: 1.0.0
+  contact:
+    email: recherche-entreprises@api.gouv.fr
+    name: Contact API Recherche d’entreprises
+    url: https://recherche-entreprises.api.gouv.fr/
+  description: >
+    # Bienvenue sur la documentation interactive d'API Recherche d’entreprises !
+
+    L’API Recherche d’entreprises permet à tout le monde retrouver une entreprise,
+    une association, ou un service public en France. Elle propose un grand nombre de
+    critères de recherche, en particulier la dénomination, l’adresse et les
+    dirigeants ou élus.
+
+    ## Données accessibles dans l'API
+
+    L’API étant totalement ouverte d'accès, elle comporte des limitations. Ainsi
+    ne sont pas accessibles dans l'API :
+
+    - les prédécesseurs et successeurs d'un établissement
+
+    - les entreprises non-diffusibles
+
+    - les entreprises qui se sont vues refuser leurs immatriculation au RCS
+
+
+    **Attention :** cette API ne permet pas d'accèder aux données complètes de
+    la  base Sirene, mais uniquement de rechercher une entreprise, par sa
+    dénomination ou son adresse. Pour savoir comment obtenir les données
+    complètes, consultez [notre fiche
+    explicative.](https://api.gouv.fr/guides/quelle-api-sirene)
+
+
+    ## Commencer à utiliser l'API
+
+    L'API est accessible à partir de cette adresse : [https://recherche-entreprises.api.gouv.fr](https://recherche-entreprises.api.gouv.fr)
+
+
+    **Attention :** Vous devez rajouter votre requête sur l’adresse.
+
+    ## Limite des requêtes
+
+      Le serveur accepte un maximum de 7 requêtes par seconde. Au delà, un code 429
+    est renvoyé indiquant que la volumétrie d'appels a été dépassée.
+
+
+
+    ## Monitoring de l'API
+
+    Une supervision du service en temps réel est
+    disponible [ici](https://annuaire-entreprises.data.gouv.fr/donnees/api#recherche-entreprise).
+
+
+    ## Infolettre
+
+    Vous pouvez vous abonner [ici](https://2f62ff46.sibforms.com/serve/MUIFAO95z3V-BJo1feDe7qoHnkmSCfysBZZFjIFSjvvnqZ1C8aAGCT1-vESBVRjnjM8fKD_Mt7Q0ENMgGon61yySA7u3dn8MS3rdd5Ax_aQ7ORuB5tglGXJ00VEnG5Tp5ggraqa5x6oPoyaleNDDkDmijlzwmSxWRs5zfSubvr3dGQMlxymwf2uU4xY1N51BjN5F5vvNMDu-s9IT) à
+    l'infolettre pour être informé des mises à jour de la part de l’équipe.
+
+openapi: 3.0.0
+paths:
+  /search:
+    get:
+      tags:
+        - Recherche textuelle
+      description: >
+        Cet endpoint permet de récupérer les unités légales et les
+        établissements correspondantes à la  recherche textuelle effectuée sur la
+        dénomination, l'adresse, les dirigeants et les élus.
+
+      summary: Recherche textuelle
+      parameters:
+        - name: q
+          in: query
+          description: >-
+            Termes de la recherche (dénomination et/ou adresse, dirigeants,
+            élus)
+          schema:
+            type: string
+      responses:
+        '200':
+          description: >-
+            La liste des unités légale et leurs établissements correspondants à
+            la recherche.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        siren:
+                          type: string
+                          example: "356000000"
+                          description: le numéro unique de l'entreprise
+                        nom_complet:
+                          type: string
+                          description: >-
+                            Champ construit depuis les champs de dénomination :
+                            dénomination de l'unité légale | Nom et prénom | Nom inconnu
+                            (dénomination usuelle : Construite en priorité à partir de
+                            la dénomination usuelle de l'établissement siège.
+                            Si cette dernière n'existe pas, elle est construite à
+                            partir des trois champs de dénomination usuelle de l'unité
+                            légale. source : base SIRENE) (sigle de l'unité légale)
+                          example: "la poste"
+                        nom_raison_sociale:
+                          type: string
+                          example: "LA POSTE"
+                          description: >-
+                            La raison sociale pour les personnes morales (source :
+                            base SIRENE).
+                        sigle:
+                          type: string
+                          nullable: true
+                          example: null
+                          description: >-
+                            Forme réduite de la raison sociale ou de la dénomination
+                            d'une personne morale ou d'un organisme public (source :
+                            base SIRENE).
+        '400':
+          description: Requête incorrecte.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  erreur:
+                    type: string
+                    example: Veuillez indiquer au moins un paramètre de recherche.
+      x-codeSamples:
+        - lang: cURL
+          label: Ligne de commande
+          source: |-
+            curl -X GET "https://recherche-entreprises.api.gouv.fr/search?q=la%20poste&page=1&per_page=1" -H  "accept: application/json"
+servers:
+  - url: https://recherche-entreprises.api.gouv.fr
+    description: Serveur de production

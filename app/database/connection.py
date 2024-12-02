@@ -3,9 +3,9 @@ from sqlalchemy.engine import URL
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-from app.config import Settings
+from app.config import settings
 
-sql_alchemy_settings = Settings.sql_alchemy
+sql_alchemy_settings = settings.sql_alchemy
 
 url = URL.create(
     drivername="postgresql",

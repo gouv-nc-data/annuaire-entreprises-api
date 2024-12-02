@@ -5,11 +5,12 @@ from fastapi import FastAPI
 
 from alembic import command
 from alembic.config import Config
+import yaml
 
 from app.database import models
 from app.database.connection import engine, url
 
-# from app.config import Settings
+from app.config import settings
 # from app.logging import setup_sentry
 from app.exceptions.exception_handlers import add_exception_handlers
 from app.routers import public
@@ -74,6 +75,17 @@ async def lifespan(app_: FastAPI):
     yield
     log.info("Shutting down...")
 
+# Load OpenAPI YAML file
+def custom_openapi():
+    if app.openapi_schema:
+        return app.openapi_schema
+    with open(settings.openapi.doc_path) as file:
+        openapi_schema = yaml.safe_load(file)
+    app.openapi_schema = openapi_schema
+    return app.openapi_schema
+
+
+
 
 app = FastAPI(
     title="API Recherche d'entreprises | Gouv.nc",
@@ -90,9 +102,11 @@ app = FastAPI(
     lifespan=lifespan,
     openapi_url="/api/v1/openapi.json",
     docs_url="/api/v1/docs",
-    redoc_url="/api/v1/redoc",
-
+    redoc_url="/api/v1/redoc",    
+    
 )
+print(settings)
+app.openapi = custom_openapi
 
 # if Settings.env == "production":
 #     setup_sentry()
