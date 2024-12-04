@@ -15,6 +15,8 @@ from app.config import settings
 from app.exceptions.exception_handlers import add_exception_handlers
 from app.routers import public
 
+from app.services.typesense.typesense import create_schema_collection
+
 # ROOT_LEVEL = "DEBUG"
 
 # LOGGING_CONFIG = {
@@ -112,6 +114,9 @@ app.openapi = custom_openapi
 #     setup_sentry()
 
 models.Base.metadata.create_all(bind=engine)
+
+#Typesense - Search app
+create_schema_collection()
 
 
 # Include routers
