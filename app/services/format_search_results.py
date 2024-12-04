@@ -23,10 +23,6 @@ def format_single_entreprise(result, search_params):
             get_field("designation"),
             get_field("sigle"),
         ),
-        "nom_complet": format_nom_complet(
-            get_field("designation"),
-            None,
-        ),
         "sigle": get_field("sigle"),
         "designation": get_field("designation"),
         "adresse_complete": format_adresse_complete(
