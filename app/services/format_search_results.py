@@ -21,9 +21,13 @@ def format_single_entreprise(result, search_params):
         "rid": get_field("rid"),
         "nom_complet": format_nom_complet(
             get_field("designation"),
-            get_field("enseigne"),
+            get_field("sigle"),
         ),
-        "enseigne": get_field("enseigne"),
+        "nom_complet": format_nom_complet(
+            get_field("designation"),
+            None,
+        ),
+        "sigle": get_field("sigle"),
         "designation": get_field("designation"),
         "adresse_complete": format_adresse_complete(
             get_field("adresse_physique"),

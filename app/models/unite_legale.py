@@ -46,7 +46,7 @@ class UniteLegaleResponse(BaseModel):
     nom_complet: str | None = None
     rid: str | None = None
     designation: str | None = None
-    enseigne: str | None = None
+    sigle: str | None = None
     forme_juridique: str | None = None
     adresse_physique: str | None = None
     code_postal_physique: str | None = None
