@@ -3,10 +3,10 @@ def format_adresse_complete(
     ville=None,
     code_postal=None,
 ):
-    if not adresse:
-        return None
+    adresse_complete = ""
 
-    adresse_complete = adresse
+    if adresse:
+        adresse_complete += f"{adresse}"
 
     # Add sigle if it exists
     if ville:

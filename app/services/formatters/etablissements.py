@@ -1,6 +1,8 @@
 from app.models.unite_legale import Etablissement
 from app.utils.helpers import get_value
 from app.services.formatters.rid import format_ridet
+from app.services.formatters.nom_complet import format_nom_complet
+from app.services.formatters.adresse_complete import format_adresse_complete
 
 
 def format_etablissements(etablissements=None):
@@ -13,6 +15,15 @@ def format_etablissements(etablissements=None):
             etablissement = etablissement_data.__dict__
 
             etablissement = Etablissement(
+                nom_complet=format_nom_complet(
+                    get_value(etablissement, "enseigne"),
+                    get_value(etablissement, "designation"),
+                ),
+                adresse_complete=format_adresse_complete(
+                    get_value(etablissement, "adresse_physique"),
+                    get_value(etablissement, "ville_physique"),
+                    get_value(etablissement, "code_postal_physique"),
+                ),
                 type_etablissement=get_value(etablissement, "type_etablissement"),
                 situation=get_value(etablissement, "situation"),
                 rid=get_value(etablissement, "rid"),
