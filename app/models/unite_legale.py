@@ -2,6 +2,8 @@ from pydantic import BaseModel
 
 
 class Etablissement(BaseModel):
+    nom_complet: str | None = None
+    adresse_complete: str | None = None
     type_etablissement: str | None = None
     situation: str | None = None
     rid: str | None = None
