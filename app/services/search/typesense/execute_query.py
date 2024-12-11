@@ -1,29 +1,43 @@
 from typesense import Client
 
 from app.controllers.search_params_model import SearchParams
+from app.controllers.field_validation import VALID_FIELD_VALUES
 
 
 def execute_typesense_query(client: Client, search_client, search_params: SearchParams):
-    print("RIDET TO LOOK FOR ", search_params.terms)
-
     page = search_params.page
     per_page = search_params.per_page
-    offset = 0
 
-    if page > 1:
-        offset = (page - 1) * per_page
+    filter_by_array = []
 
-    search_parameters = {
-        "q": search_params.terms,
-        "query_by": "rid",
-        "per_page": per_page,
+    search_options = {
         "page": page,
+        "per_page": per_page,
     }
 
-    result = client.collections["entreprise"].documents.search(search_parameters)
-    total_results = result["found"]
+    if search_client is not None:
+        if search_client["q"] is not None:
+            search_options["q"] = search_client["q"]
 
-    print("---RESULT---", result["hits"])
-    print("---RESULT FOUND ---", result["found"])
+        if search_client["query_by"] is not None:
+            search_options["query_by"] = search_client["query_by"]
+    else:
+        search_options["q"] = "*"
+
+    for key, value in search_params:
+
+        field = VALID_FIELD_VALUES.get(key)
+
+        if isinstance(field, dict):
+            alias = field["alias"]
+            if alias is not None:
+                if value is not None:
+                    filter_by_array.append(f"{alias}:{value}")
+
+    if len(filter_by_array) is not 0:
+        search_options["filter_by"] = "&&".join(filter_by_array)
+
+    result = client.collections["entreprises"].documents.search(search_options)
+    total_results = result["found"]
 
     return {"total_results": total_results, "results": result["hits"]}

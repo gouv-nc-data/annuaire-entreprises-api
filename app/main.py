@@ -116,7 +116,8 @@ app.openapi = custom_openapi
 models.Base.metadata.create_all(bind=engine)
 
 #Typesense - Search app
-create_schema_collection()
+# Uncomment to create Typesense collection schema and generate the entreprise etablissements json file to index into typesense
+# create_schema_collection()
 
 
 # Include routers
