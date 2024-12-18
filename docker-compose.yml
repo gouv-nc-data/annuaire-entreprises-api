@@ -18,7 +18,29 @@ services:
       - 22071:22071
     environment:
       SCAN_HOSTS: recherche-entreprises-db
+  recherche-entreprises-umami-db:
+    container_name: recherche-entreprises-umami
+    platform: linux/amd64 #for platform error on Apple M1 chips
+    env_file: .env
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${DATABASE_UMAMI_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_UMAMI_PASSWORD}
+      POSTGRES_DB: ${DATABASE_UMAMI_NAME}
+    volumes:
+      - recherche-entreprises-umami:/var/lib/postgresql/data/ #using a volume
+  umami:
+    image: ghcr.io/umami-software/umami:postgresql-latest
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgresql://${DATABASE_UMAMI_USERNAME}:${DATABASE_UMAMI_PASSWORD}@recherche-entreprises-umami-db:5432/${DATABASE_UMAMI_NAME}
+      DATABASE_TYPE: postgresql
+      APP_SECRET: ${UMAMI_APP_SECRET}
+    depends_on:
+      - recherche-entreprises-umami-db
 
 
 volumes:
   recherche-entreprises:
+  recherche-entreprises-umami:
