@@ -32,12 +32,20 @@ class DocsConfig(BaseSettings):
             raise ValueError(f"The specified path does not exist: {v}")
         return v
 
+
 # class SentryConfig(ConfigDict):
 #     dsn: str = config["SENTRY_DSN"]
 
 
+class TypesenseConfig(BaseSettings):
+    typesense_api_key: str = Field(config["TYPESENSE_API_KEY"])
+    typesense_api_host: str = Field(config["TYPESENSE_API_HOST"])
+    typesense_api_port: str = Field(config["TYPESENSE_API_PORT"])
+
+
 class Settings(BaseSettings):
     sql_alchemy: SqlAlchemyConfig = Field(default_factory=SqlAlchemyConfig)
+    typesense: TypesenseConfig = Field(default_factory=TypesenseConfig)
     openapi: DocsConfig = Field(default_factory=DocsConfig)
     # sentry = SentryConfig
     env: str = "development"  # config["ENV"] or "development"

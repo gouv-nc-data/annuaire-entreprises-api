@@ -11,9 +11,11 @@ from app.database import models
 from app.database.connection import engine, url
 
 from app.config import settings
+
 # from app.logging import setup_sentry
 from app.exceptions.exception_handlers import add_exception_handlers
 from app.routers import public
+from app.routers import private
 
 from app.services.typesense.typesense import create_schema_collection_and_documents
 
@@ -60,9 +62,11 @@ log = logging.getLogger(__name__)
 
 
 def run_migrations():
-    try: 
+    try:
         alembic_cfg = Config("alembic.ini")
-        alembic_cfg.set_main_option("sqlalchemy.url", str(url.render_as_string(hide_password=False)))
+        alembic_cfg.set_main_option(
+            "sqlalchemy.url", str(url.render_as_string(hide_password=False))
+        )
         command.upgrade(alembic_cfg, "head")
     except Exception as e:
         print(e)
@@ -77,6 +81,7 @@ async def lifespan(app_: FastAPI):
     yield
     log.info("Shutting down...")
 
+
 # Load OpenAPI YAML file
 def custom_openapi():
     if app.openapi_schema:
@@ -85,8 +90,6 @@ def custom_openapi():
         openapi_schema = yaml.safe_load(file)
     app.openapi_schema = openapi_schema
     return app.openapi_schema
-
-
 
 
 app = FastAPI(
@@ -104,8 +107,7 @@ app = FastAPI(
     lifespan=lifespan,
     openapi_url="/api/v1/openapi.json",
     docs_url="/api/v1/docs",
-    redoc_url="/api/v1/redoc",    
-    
+    redoc_url="/api/v1/redoc",
 )
 print(settings)
 app.openapi = custom_openapi
@@ -115,13 +117,11 @@ app.openapi = custom_openapi
 
 models.Base.metadata.create_all(bind=engine)
 
-#Typesense - Search app
-# Uncomment to create Typesense collection schema and generate the entreprise etablissements json file to index into typesense
-# create_schema_collection_documents()
 
 
 # Include routers
 app.include_router(public.router, prefix="/api/v1")
+app.include_router(private.router)
 
 # Add exception handlers
 add_exception_handlers(app)

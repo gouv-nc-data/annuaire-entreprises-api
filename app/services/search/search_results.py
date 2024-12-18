@@ -9,24 +9,10 @@ from app.services.formatters.entreprise_results import (
 from app.services.search.queries.execute_query import execute_sqlalchemy_query
 from app.services.search.typesense.execute_query import execute_typesense_query
 
-import typesense
+from app.typesense.connection import typesense_client
+
 
 db = SessionLocal()
-
-typesense_client = typesense.Client(
-    {
-        "nodes": [
-            {
-                "host": "localhost",  # For Typesense Cloud use xxx.a1.typesense.net
-                "port": "8108",  # For Typesense Cloud use 443
-                "protocol": "http",  # For Typesense Cloud use https
-            }
-        ],
-        "api_key": "xyz",
-        "connection_timeout_seconds": 2,
-    }
-)
-
 
 class SearchResult:
     def __init__(self, search_params=None):
