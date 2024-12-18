@@ -15,6 +15,8 @@ from app.config import settings
 from app.exceptions.exception_handlers import add_exception_handlers
 from app.routers import public
 
+from app.services.typesense.typesense import create_schema_collection_and_documents
+
 # ROOT_LEVEL = "DEBUG"
 
 # LOGGING_CONFIG = {
@@ -112,6 +114,10 @@ app.openapi = custom_openapi
 #     setup_sentry()
 
 models.Base.metadata.create_all(bind=engine)
+
+#Typesense - Search app
+# Uncomment to create Typesense collection schema and generate the entreprise etablissements json file to index into typesense
+# create_schema_collection_documents()
 
 
 # Include routers

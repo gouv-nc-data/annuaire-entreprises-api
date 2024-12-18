@@ -1,7 +1,7 @@
 from app.services.search.parsers.rid import is_rid
 from app.services.search.parsers.ridet import is_ridet
-from app.services.search.queries.search_by_rid import search_by_rid
-from app.services.search.queries.search_by_text import search_by_text
+from app.services.search.typesense.search_by_rid import search_by_rid
+from app.services.search.typesense.search_by_text import search_by_text
 
 
 def build_search(search_build):
