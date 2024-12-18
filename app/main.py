@@ -17,8 +17,6 @@ from app.exceptions.exception_handlers import add_exception_handlers
 from app.routers import public
 from app.routers import private
 
-from app.services.typesense.typesense import create_schema_collection_and_documents
-
 # ROOT_LEVEL = "DEBUG"
 
 # LOGGING_CONFIG = {

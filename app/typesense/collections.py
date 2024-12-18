@@ -80,8 +80,13 @@ entreprise_schema = {
 
 def create_schema_collection_and_documents():
     try:
-        # typesense_client.collections["entreprises"].delete()
+        entreprise_collection = typesense_client.collections["entreprises"].retrieve()
+
+        if entreprise_collection is not None:
+            typesense_client.collections["entreprises"].delete()
+
         typesense_client.collections.create(entreprise_schema)
+
     except Exception as e:
         print(
             f"An error occurred during the creation of collections for typesense: {e}"
