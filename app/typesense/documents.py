@@ -51,7 +51,6 @@ def create_typesense_nested_documents():
                         "activites_secondaires": etablissement.activites_secondaires,
                         "adresse_physique": etablissement.adresse_physique,
                         "adresse_postale": etablissement.adresse_postale,
-                        "ape": etablissement.ape,
                     }
                     for etablissement in entreprise.etablissements
                 ],

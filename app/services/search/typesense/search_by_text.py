@@ -1,5 +1,3 @@
-from sqlalchemy import or_
-from app.database import models
 from app.controllers.search_params_model import SearchParams
 
 
