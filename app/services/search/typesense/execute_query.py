@@ -32,10 +32,16 @@ def execute_typesense_query(client: Client, search_client, search_params: Search
             alias = field["alias"]
             if alias is not None:
                 if value is not None:
-                    filter_by_array.append(f"{alias}:{value}")
+                    if len(filter_by_array) is 0:
+                        filter_by_array.append(f"{alias}:{value}")
+                    else:
+                        filter_by_array.append(f"&&{alias}:{value}")
+
+                    if alias == "ville_physique":
+                        filter_by_array.append(f"||etablissements.{alias}:{value}")
 
     if len(filter_by_array) is not 0:
-        search_options["filter_by"] = "&&".join(filter_by_array)
+        search_options["filter_by"] = "".join(filter_by_array)
 
     result = client.collections["entreprises"].documents.search(search_options)
     total_results = result["found"]
