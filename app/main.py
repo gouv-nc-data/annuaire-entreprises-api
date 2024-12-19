@@ -16,6 +16,7 @@ from app.config import settings
 from app.exceptions.exception_handlers import add_exception_handlers
 from app.routers import public
 from app.routers import private
+from app.routers import agent_public
 
 # ROOT_LEVEL = "DEBUG"
 
@@ -116,10 +117,10 @@ app.openapi = custom_openapi
 models.Base.metadata.create_all(bind=engine)
 
 
-
 # Include routers
 app.include_router(public.router, prefix="/api/v1")
 app.include_router(private.router)
+app.include_router(agent_public.router)
 
 # Add exception handlers
 add_exception_handlers(app)
