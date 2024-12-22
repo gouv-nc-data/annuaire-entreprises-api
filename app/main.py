@@ -119,8 +119,8 @@ models.Base.metadata.create_all(bind=engine)
 
 # Include routers
 app.include_router(public.router, prefix="/api/v1")
-app.include_router(private.router)
-app.include_router(agent_public.router)
+app.include_router(private.router, prefix="/api/v1")
+app.include_router(agent_public.router, prefix="/api/v1")
 
 # Add exception handlers
 add_exception_handlers(app)
