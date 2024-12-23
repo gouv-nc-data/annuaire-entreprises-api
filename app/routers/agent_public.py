@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Request
+from fastapi import APIRouter
 from pydantic import BaseModel, EmailStr
 
 router = APIRouter()
@@ -18,5 +18,5 @@ async def agent_plubic_signup(email_request: EmailRequest):
             file.write(email + "\n")
 
         return {"success": True}
-    except Exception as e:
+    except Exception:
         return {"success": False}
