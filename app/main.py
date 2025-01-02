@@ -1,4 +1,3 @@
-import logging
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
@@ -6,6 +5,7 @@ from fastapi import FastAPI
 from alembic import command
 from alembic.config import Config
 import yaml
+from loguru import logger
 
 from app.database import models
 from app.database.connection import engine, url
@@ -56,10 +56,6 @@ from app.routers import agent_public
 # }
 
 # logging.config.dictConfig(LOGGING_CONFIG)
-logging.basicConfig()
-logging.getLogger().setLevel(logging.INFO)
-
-log = logging.getLogger(__name__)
 
 
 def run_migrations():
@@ -70,17 +66,17 @@ def run_migrations():
         )
         command.upgrade(alembic_cfg, "head")
     except Exception as e:
-        log.error(e)
+        logger.error(e)
         raise e
 
 
 @asynccontextmanager
 async def lifespan(app_: FastAPI):
-    log.info("Starting up...")
-    log.info("run alembic upgrade head...")
+    logger.info("Starting up...")
+    logger.info("run alembic upgrade head...")
     run_migrations()
     yield
-    log.info("Shutting down...")
+    logger.info("Shutting down...")
 
 
 # Load OpenAPI YAML file
@@ -110,7 +106,7 @@ app = FastAPI(
     docs_url="/api/v1/docs",
     redoc_url="/api/v1/redoc",
 )
-log.info(settings)
+logger.info(settings)
 app.openapi = custom_openapi
 
 # if Settings.env == "production":
