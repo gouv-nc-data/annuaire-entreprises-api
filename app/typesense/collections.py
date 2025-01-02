@@ -1,6 +1,7 @@
 # Collection is the name in typesense related to indexed schema
 from app.typesense.connection import typesense_client
 from loguru import logger
+from typesense.exceptions import ObjectNotFound
 
 entreprise_schema = {
     "name": "entreprises",
@@ -86,7 +87,9 @@ def create_schema_collection_and_documents():
             typesense_client.collections["entreprises"].delete()
 
         typesense_client.collections.create(entreprise_schema)
-
+    except ObjectNotFound:
+        logger.warn("première initialisation => creation de la collection")
+        typesense_client.collections.create(entreprise_schema)
     except Exception as e:
         logger.error("An error occurred during the creation of collections for typesense:", e)
         raise e
