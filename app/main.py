@@ -56,6 +56,8 @@ from app.routers import agent_public
 # }
 
 # logging.config.dictConfig(LOGGING_CONFIG)
+logging.basicConfig()
+logging.getLogger().setLevel(logging.INFO)
 
 log = logging.getLogger(__name__)
 
