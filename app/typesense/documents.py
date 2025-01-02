@@ -4,9 +4,10 @@ from app.database import models
 from app.database.connection import SessionLocal
 
 from app.typesense.connection import typesense_client
+import logging
 
 db = SessionLocal()
-
+log = logging.getLogger(__name__)
 
 # Documents is the name in typesense related to indexed objects (item)
 def create_typesense_nested_documents():
@@ -64,6 +65,5 @@ def create_typesense_nested_documents():
         )
 
     except Exception as e:
-        print(
-            f"An error occurred during the creation of the documents for typesense: {e}"
-        )
+        log.error("An error occurred during the creation of the documents for typesense:", e)
+        raise e

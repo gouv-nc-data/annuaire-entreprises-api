@@ -4,12 +4,14 @@ from app.services.formatters.nom_complet import format_nom_complet
 from app.services.formatters.date import format_date
 from app.services.formatters.dirigeants import format_dirigeants
 from app.services.formatters.etablissements import format_etablissements
+import logging
 
+log = logging.getLogger(__name__)
 
 def format_single_entreprise(result, search_params):
     result_entreprise = result["entreprise"]
 
-    print("result_entreprise", result_entreprise)
+    log.debug("result_entreprise", result_entreprise)
 
     def get_field(field, default=None):
         value = result_entreprise.get(field, default)

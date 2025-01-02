@@ -70,7 +70,7 @@ def run_migrations():
         )
         command.upgrade(alembic_cfg, "head")
     except Exception as e:
-        print(e)
+        log.error(e)
         raise e
 
 
@@ -110,7 +110,7 @@ app = FastAPI(
     docs_url="/api/v1/docs",
     redoc_url="/api/v1/redoc",
 )
-print(settings)
+log.info(settings)
 app.openapi = custom_openapi
 
 # if Settings.env == "production":

@@ -4,7 +4,9 @@ from app.database import models
 
 from app.controllers.search_params_model import SearchParams
 from app.controllers.field_validation import VALID_FIELD_VALUES
+import logging
 
+log = logging.getLogger(__name__)
 
 def execute_sqlalchemy_query(db: Session, search_client, search_params: SearchParams):
 
@@ -62,12 +64,14 @@ def execute_sqlalchemy_query(db: Session, search_client, search_params: SearchPa
                             stmt = stmt.filter(filter_expr)
                             count_stmt = count_stmt.filter(filter_expr)
                         except Exception as e:
-                            print("Filtering regex in sql alchemy is wrong...", e)
+                            log.error("Filtering regex in sql alchemy is wrong...", e)
+                            raise e
 
         total_results = db.execute(count_stmt).scalar_one()
 
     except Exception as e:
-        print("something went wrong in sql alchemy searching...", e)
+        log.error("something went wrong in sql alchemy searching...", e)
+        raise e
     finally:
         return {
             "total_results": total_results,

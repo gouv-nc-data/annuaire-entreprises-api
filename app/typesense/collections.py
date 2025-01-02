@@ -1,7 +1,9 @@
 # Collection is the name in typesense related to indexed schema
-
+import logging
 from app.typesense.connection import typesense_client
 
+
+log = logging.getLogger(__name__)
 entreprise_schema = {
     "name": "entreprises",
     "enable_nested_fields": True,
@@ -88,6 +90,5 @@ def create_schema_collection_and_documents():
         typesense_client.collections.create(entreprise_schema)
 
     except Exception as e:
-        print(
-            f"An error occurred during the creation of collections for typesense: {e}"
-        )
+        log.error("An error occurred during the creation of collections for typesense:", e)
+        raise e
