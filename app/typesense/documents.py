@@ -64,5 +64,5 @@ def create_typesense_nested_documents():
         )
 
     except Exception as e:
-        logger.error("An error occurred during the creation of the documents for typesense:", e)
+        logger.exception("An error occurred during the creation of the documents for typesense")
         raise e
