@@ -23,6 +23,8 @@ class SearchResult:
 
     def execute_search(self):
 
+        print('in search result TYPESENSE CLIENT IS DEFINIED ?: ', typesense_client)
+
         typesense_query = execute_typesense_query(
             typesense_client, self.search_client, self.search_params
         )
