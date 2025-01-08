@@ -38,7 +38,6 @@ class Entreprise(Base):
     motif_radiation = Column(String)
     convention_collective = Column(String)
     situation_entreprise = Column(String)
-    
 
     # Immatriculation RCS
     numero_rcs = Column(String)
@@ -98,7 +97,9 @@ class Etablissement(Base):
     date_fin_activite = Column(Date)
     convention_collective = Column(String)
 
-    entreprise_id: Mapped[int] = mapped_column(ForeignKey("entreprise.id", ondelete="CASCADE"))
+    entreprise_id: Mapped[int] = mapped_column(
+        ForeignKey("entreprise.id", ondelete="CASCADE")
+    )
 
     entreprise: Mapped["Entreprise"] = relationship(back_populates="etablissements")
 
@@ -129,15 +130,17 @@ class Dirigeant(Base):
     maitre_apprentissage = Column(String)
     qualifie_dans_son_metier = Column(String)
 
-    entreprise_id: Mapped[int] = mapped_column(ForeignKey("entreprise.id", ondelete="CASCADE"), nullable=True)
+    entreprise_id: Mapped[int] = mapped_column(
+        ForeignKey("entreprise.id", ondelete="CASCADE"), nullable=True
+    )
 
     entreprise: Mapped["Entreprise"] = relationship(back_populates="dirigeants")
 
-    etablissement_id: Mapped[int] = mapped_column(ForeignKey("etablissement.id", ondelete="CASCADE"), nullable=True)
-
-    etablissement: Mapped["Etablissement"] = relationship(
-        back_populates="dirigeants"
+    etablissement_id: Mapped[int] = mapped_column(
+        ForeignKey("etablissement.id", ondelete="CASCADE"), nullable=True
     )
+
+    etablissement: Mapped["Etablissement"] = relationship(back_populates="dirigeants")
 
 
 class IndicateursFinanciers(Base):
@@ -150,11 +153,16 @@ class IndicateursFinanciers(Base):
     excedent_brut_exploitation = Column(Integer)
     resultat_net = Column(Integer)
 
-    entreprise_id: Mapped[int] = mapped_column(ForeignKey("entreprise.id", ondelete="CASCADE"), nullable=True)
+    entreprise_id: Mapped[int] = mapped_column(
+        ForeignKey("entreprise.id", ondelete="CASCADE"), nullable=True
+    )
 
-#     entreprise: Mapped["Entreprise"] = relationship(back_populates="dirigeants")
+    #     entreprise: Mapped["Entreprise"] = relationship(back_populates="dirigeants")
 
-    etablissement_id: Mapped[int] = mapped_column(ForeignKey("etablissement.id", ondelete="CASCADE"), nullable=True)
+    etablissement_id: Mapped[int] = mapped_column(
+        ForeignKey("etablissement.id", ondelete="CASCADE"), nullable=True
+    )
+
 
 #     etablissement: Mapped["Etablissement"] = relationship(
 #         back_populates="indicateurs_financiers"
@@ -173,3 +181,11 @@ class Bilan(Base):
     etablissement_id: Mapped[int] = mapped_column(
         ForeignKey("etablissement.id", ondelete="CASCADE"), nullable=True
     )
+
+
+class AgentPublic(Base):
+    __tablename__ = "agent_public"
+
+    id = Column(Integer, primary_key=True)
+    email = Column(String)
+    reason = Column(String)
