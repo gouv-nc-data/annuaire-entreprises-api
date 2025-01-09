@@ -8,7 +8,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: gouv-nv-data/custom-typesense
+  IMAGE_NAME: gouv-nc-data/custom-typesense
 
 jobs:
   deploy:
