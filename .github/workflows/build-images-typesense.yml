@@ -1,4 +1,4 @@
-name: Build docker image
+name: Build typesense docker image
 
 on:
   push:
@@ -44,6 +44,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
+          file: Dockerfile.typesense
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
