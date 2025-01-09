@@ -59,7 +59,7 @@ info:
 
 openapi: 3.0.0
 paths:
-  /search:
+  /recherche:
     get:
       tags:
         - Recherche textuelle
@@ -92,9 +92,9 @@ paths:
                     items:
                       type: object
                       properties:
-                        siren:
+                        rid:
                           type: string
-                          example: "356000000"
+                          example: "0122531"
                           description: le numéro unique de l'entreprise
                         nom_complet:
                           type: string
@@ -106,17 +106,17 @@ paths:
                             Si cette dernière n'existe pas, elle est construite à
                             partir des trois champs de dénomination usuelle de l'unité
                             légale. source : base SIRENE) (sigle de l'unité légale)
-                          example: "la poste"
-                        nom_raison_sociale:
+                          example: "DIRECTION DU NUMERIQUE ET DE LA MODERNISATION"
+                        designation:
                           type: string
-                          example: "LA POSTE"
+                          example: "DIRECTION DU NUMERIQUE ET DE LA MODERNISATION"
                           description: >-
                             La raison sociale pour les personnes morales (source :
                             base SIRENE).
                         sigle:
                           type: string
                           nullable: true
-                          example: null
+                          example: "DINUM"
                           description: >-
                             Forme réduite de la raison sociale ou de la dénomination
                             d'une personne morale ou d'un organisme public (source :
@@ -135,7 +135,7 @@ paths:
         - lang: cURL
           label: Ligne de commande
           source: |-
-            curl -X GET "https://recherche-entreprises.api.gouv.fr/search?q=la%20poste&page=1&per_page=1" -H  "accept: application/json"
+            curl -X GET "https://annuaire-entreprises.gouv.gnc.fr/recherche?q=dinum&page=1&per_page=1" -H  "accept: application/json"
 servers:
-  - url: https://recherche-entreprises.api.gouv.fr
+  - url: /api/v1
     description: Serveur de production

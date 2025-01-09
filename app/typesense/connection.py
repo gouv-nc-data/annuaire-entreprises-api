@@ -15,7 +15,7 @@ typesense_client = typesense.Client(
         ],
         "api_key": typesense_settings.typesense_api_key,
         "connection_timeout_seconds": 360000,
-        "healthy-read-lag":100000,
-        "healthy-write-lag":100000,
+        "healthy-read-lag": 100000,
+        "healthy-write-lag": 100000,
     }
 )
