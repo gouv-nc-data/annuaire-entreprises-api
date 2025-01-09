@@ -8,3 +8,4 @@ RUN groupadd -g ${gid} ${group}
 RUN useradd -u ${uid} -g ${group} -s /bin/sh -m ${user} 
 
 USER ${uid}:${gid}
+
