@@ -129,6 +129,9 @@ class Dirigeant(Base):
     situation_matrimoniale = Column(String)
     maitre_apprentissage = Column(String)
     qualifie_dans_son_metier = Column(String)
+    type_personne = Column(String)
+    ordreaffichage = Column(Integer)
+    numerochrono = Column(Integer)
 
     entreprise_id: Mapped[int] = mapped_column(
         ForeignKey("entreprise.id", ondelete="CASCADE"), nullable=True
