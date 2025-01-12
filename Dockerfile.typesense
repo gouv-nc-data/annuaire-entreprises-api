@@ -2,8 +2,8 @@ FROM typesense/typesense:27.1
 
 ARG user=appuser
 ARG group=appuser
-ARG uid=1000
-ARG gid=1000
+ARG uid=1001
+ARG gid=1001
 RUN groupadd -g ${gid} ${group}
 RUN useradd -u ${uid} -g ${group} -s /bin/sh -m ${user} 
 
