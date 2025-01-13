@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, String
 from app.database.connection import Base
 
 from sqlalchemy import Date, Boolean, ForeignKey
-from sqlalchemy.dialects.postgresql import JSONB
+# from sqlalchemy.dialects.postgresql import JSONB
 from typing import List
 from sqlalchemy.orm import relationship, mapped_column
 from sqlalchemy.orm import Mapped
@@ -133,7 +133,7 @@ class Dirigeant(Base):
     ordreaffichage = Column(Integer)
     numerochrono = Column(Integer)
     actif = Column(Boolean)
-    fonction = Column(JSONB)
+    fonction = Column(String)
 
 
     entreprise_id: Mapped[int] = mapped_column(
