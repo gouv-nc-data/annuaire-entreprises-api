@@ -160,7 +160,7 @@ class IndicateursFinanciers(Base):
     effectif = Column(String)
     chiffredaffaire = Column(String)
     numerodepot = Column(String)
-    dureeexcercice = Column(Integer)
+    dureeexercice = Column(Integer)
     datedepot = Column(Date)
     datecloture = Column(Date)
     
