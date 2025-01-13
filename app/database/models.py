@@ -153,7 +153,7 @@ class IndicateursFinanciers(Base):
     __tablename__ = "indicateurs_financiers"
 
     id = Column(Integer, primary_key=True)
-    noncommmandable = Column(String)
+    noncommandable = Column(String)
     diffusable = Column(String)
     resultat = Column(Float)
     devise = Column(String)
