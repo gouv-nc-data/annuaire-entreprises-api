@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, String
 from app.database.connection import Base
 
 from sqlalchemy import Date, Boolean, ForeignKey
-from sqlalchemy.dialects.postgresql import JSONB
+# from sqlalchemy.dialects.postgresql import JSONB
 from typing import List
 from sqlalchemy.orm import relationship, mapped_column
 from sqlalchemy.orm import Mapped
