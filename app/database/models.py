@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, Float
 from app.database.connection import Base
 
 from sqlalchemy import Date, Boolean, ForeignKey
@@ -153,12 +153,17 @@ class IndicateursFinanciers(Base):
     __tablename__ = "indicateurs_financiers"
 
     id = Column(Integer, primary_key=True)
-    date_cloture = Column(Date)
-    chiffre_affaire = Column(Integer)
-    marge_brute = Column(Integer)
-    excedent_brut_exploitation = Column(Integer)
-    resultat_net = Column(Integer)
-
+    noncommmandable = Column(String)
+    diffusable = Column(String)
+    resultat = Column(Float)
+    devise = Column(String)
+    effectif = Column(String)
+    chiffredaffaire = Column(String)
+    numerodepot = Column(String)
+    dureeexcercice = Column(Integer)
+    datedepot = Column(Date)
+    datecloture = Column(Date)
+    
     entreprise_id: Mapped[int] = mapped_column(
         ForeignKey("entreprise.id", ondelete="CASCADE"), nullable=True
     )
