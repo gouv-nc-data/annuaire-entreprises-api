@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, String
 from app.database.connection import Base
 
 from sqlalchemy import Date, Boolean, ForeignKey
-# from sqlalchemy.dialects.postgresql import JSONB
+from sqlalchemy.dialects.postgresql import JSONB
 from typing import List
 from sqlalchemy.orm import relationship, mapped_column
 from sqlalchemy.orm import Mapped
@@ -117,7 +117,6 @@ class Dirigeant(Base):
     __tablename__ = "dirigeant"
 
     id = Column(Integer, primary_key=True)
-    role = Column(String)
     nom = Column(String)
     date_naissance = Column(String)
     nationalite = Column(String)
@@ -133,6 +132,9 @@ class Dirigeant(Base):
     type_personne = Column(String)
     ordreaffichage = Column(Integer)
     numerochrono = Column(Integer)
+    actif = Column(Boolean)
+    fonction = Column(JSONB)
+
 
     entreprise_id: Mapped[int] = mapped_column(
         ForeignKey("entreprise.id", ondelete="CASCADE"), nullable=True
