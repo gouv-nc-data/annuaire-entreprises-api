@@ -117,7 +117,7 @@ class Dirigeant(Base):
     __tablename__ = "dirigeant"
 
     id = Column(Integer, primary_key=True)
-    role = Column(JSONB)
+    role = Column(String)
     nom = Column(String)
     date_naissance = Column(String)
     nationalite = Column(String)
