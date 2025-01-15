@@ -118,6 +118,8 @@ class Dirigeant(Base):
 
     id = Column(Integer, primary_key=True)
     nom = Column(String)
+    prenoms = Column(String)
+    nom_personne_morale = Column(String)
     date_naissance = Column(String)
     nationalite = Column(String)
     adresse = Column(String)
@@ -134,7 +136,6 @@ class Dirigeant(Base):
     numerochrono = Column(Integer)
     actif = Column(Boolean)
     fonction = Column(String)
-
 
     entreprise_id: Mapped[int] = mapped_column(
         ForeignKey("entreprise.id", ondelete="CASCADE"), nullable=True
