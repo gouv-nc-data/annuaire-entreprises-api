@@ -7,7 +7,7 @@ def search_by_text(search_params: SearchParams):
 
     search_parameters = {
         "q": query_terms,
-        "query_by": "designation, sigle, etablissements.enseigne, adresse_physique, etablissements.adresse_physique",
+        "query_by": "designation, sigle, etablissements.enseigne, adresse_physique, etablissements.adresse_physique, dirigeants.nom",
     }
 
     return search_parameters
