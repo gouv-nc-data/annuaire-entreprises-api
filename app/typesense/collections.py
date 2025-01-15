@@ -24,9 +24,19 @@ entreprise_schema = {
         {"name": "adresse_physique", "type": "string", "facet": True, "optional": True},
         {"name": "adresse_postale", "type": "string", "optional": True},
         {"name": "code_ape", "type": "string", "facet": True, "optional": True},
-        {"name": "etablissements", "type": "object[]"},
-        {"name": "etablissements.rid", "type": "string[]", "facet": True},
-        {"name": "etablissements.et", "type": "string[]", "facet": True},
+        {"name": "etablissements", "type": "object[]", "optional": True},
+        {
+            "name": "etablissements.rid",
+            "type": "string[]",
+            "facet": True,
+            "optional": True,
+        },
+        {
+            "name": "etablissements.et",
+            "type": "string[]",
+            "facet": True,
+            "optional": True,
+        },
         {
             "name": "etablissements.enseigne",
             "type": "string[]",
@@ -75,6 +85,108 @@ entreprise_schema = {
             "facet": True,
             "optional": True,
         },
+        {"name": "dirigeants", "type": "object[]", "optionnal": True},
+        {
+            "name": "dirigeants.nom",
+            "type": "string[]",
+            "facet": True,
+            "optionnal": True,
+        },
+        {
+            "name": "dirigeants.date_naissance",
+            "type": "string[]",
+            "facet": True,
+            "optionnal": True,
+        },
+        {
+            "name": "dirigeants.nationalite",
+            "type": "string[]",
+            "facet": True,
+            "optionnal": True,
+        },
+        {
+            "name": "dirigeants.code_postal",
+            "type": "string[]",
+            "facet": True,
+            "optionnal": True,
+        },
+        {
+            "name": "dirigeants.ville",
+            "type": "string[]",
+            "facet": True,
+            "optionnal": True,
+        },
+        {
+            "name": "dirigeants.type_personne",
+            "type": "string[]",
+            "facet": True,
+            "optionnal": True,
+        },
+        {
+            "name": "dirigeants.ordreaffichage",
+            "type": "int32[]",
+            "facet": True,
+            "optionnal": True,
+        },
+        {
+            "name": "dirigeants.numerochrono",
+            "type": "int32[]",
+            "facet": True,
+            "optionnal": True,
+        },
+        {
+            "name": "dirigeants.actif",
+            "type": "bool[]",
+            "facet": True,
+            "optionnal": True,
+        },
+        {
+            "name": "dirigeants.fonction",
+            "type": "string[]",
+            "facet": True,
+            "optionnal": True,
+        },
+        {"name": "indicateurs_financiers", "type": "object[]", "optionnal": True},
+        {
+            "name": "indicateurs_financiers.noncommandable",
+            "type": "string[]",
+            "facet": True,
+            "optionnal": True,
+        },
+        {
+            "name": "indicateurs_financiers.diffusable",
+            "type": "string[]",
+            "facet": True,
+            "optionnal": True,
+        },
+        # {"name": "indicateurs_financiers.resultat", "type": "float[]", "facet": True},
+        # {"name": "indicateurs_financiers.devise", "type": "string[]", "facet": True},
+        # {"name": "indicateurs_financiers.effectif", "type": "string[]", "facet": True},
+        # {"name": "indicateurs_financiers.chiffredaffaire", "type": "string[]", "facet": True},
+        {
+            "name": "indicateurs_financiers.numerodepot",
+            "type": "string[]",
+            "facet": True,
+            "optionnal": True,
+        },
+        {
+            "name": "indicateurs_financiers.dureeexercice",
+            "type": "int32[]",
+            "facet": True,
+            "optionnal": True,
+        },
+        {
+            "name": "indicateurs_financiers.datedepot",
+            "type": "string[]",
+            "facet": True,
+            "optionnal": True,
+        },
+        {
+            "name": "indicateurs_financiers.datecloture",
+            "type": "string[]",
+            "facet": True,
+            "optionnal": True,
+        },
     ],
 }
 
@@ -91,5 +203,7 @@ def create_schema_collection_and_documents():
         logger.warning("première initialisation => creation de la collection")
         typesense_client.collections.create(entreprise_schema)
     except Exception as e:
-        logger.exception("An error occurred during the creation of collections for typesense:")
+        logger.exception(
+            "An error occurred during the creation of collections for typesense:"
+        )
         raise e

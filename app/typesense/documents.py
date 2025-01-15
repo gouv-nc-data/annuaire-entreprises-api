@@ -6,7 +6,9 @@ from app.database.connection import SessionLocal
 from app.typesense.connection import typesense_client
 
 from loguru import logger
+
 db = SessionLocal()
+
 
 # Documents is the name in typesense related to indexed objects (item)
 def create_typesense_nested_documents():
@@ -54,15 +56,88 @@ def create_typesense_nested_documents():
                     }
                     for etablissement in entreprise.etablissements
                 ],
+                "dirigeants": [
+                    {
+                        "nom": dirigeant.nom,
+                        "date_naissance": dirigeant.date_naissance,
+                        "nationalite": dirigeant.nationalite,
+                        "adresse": dirigeant.adresse,
+                        "code_postal": dirigeant.code_postal,
+                        "ville": dirigeant.ville,
+                        "type_personne": dirigeant.type_personne,
+                        "ordreaffichage": dirigeant.ordreaffichage,
+                        "numerochrono": dirigeant.numerochrono,
+                        "actif": dirigeant.actif,
+                        "fonction": dirigeant.fonction,
+                    }
+                    for dirigeant in entreprise.dirigeants
+                ],
+                "indicateurs_financiers": [
+                    {
+                        "noncommandable": indicateur_financier.noncommandable,
+                        "diffusable": indicateur_financier.diffusable,
+                        "resultat": indicateur_financier.resultat,
+                        "devise": indicateur_financier.devise,
+                        "effectif": indicateur_financier.effectif,
+                        "chiffredaffaire": indicateur_financier.chiffredaffaire,
+                        "numerodepot": indicateur_financier.numerodepot,
+                        "dureeexercice": indicateur_financier.dureeexercice,
+                        "datedepot": str(indicateur_financier.datedepot),
+                        "datecloture": str(indicateur_financier.datecloture),
+                    }
+                    for indicateur_financier in entreprise.indicateurs_financiers
+                ],
             }
+
+            # Typense can't index the object if one of its nested field is empty
+            # This trick is used to correclty index the parent entreprise even if the nested field (dirigeants) is empty
+            # This is how typesense works
+            # Might change in the future...
+            # We're creating false values for 1 nested field
+            # Not sent the API Result tho
+            # Used only to index the parent
+            if len(entreprise_data["dirigeants"]) == 0:
+                entreprise_data["dirigeants"] = [
+                    {
+                        "nom": "null",
+                        "actif": False,
+                        "date_naissance": "null",
+                        "nationalite": "null",
+                        "adresse": "null",
+                        "code_postal": "null",
+                        "ville": "null",
+                        "type_personne": "null",
+                        "ordreaffichage": 0,
+                        "numerochrono": 0,
+                        "fonction": "null",
+                    }
+                ]
+
+            if len(entreprise_data["indicateurs_financiers"]) == 0:
+                entreprise_data["indicateurs_financiers"] = [
+                    {
+                        "noncommandable": "null",
+                        "diffusable": "false",
+                        "resultat": 0.0000,
+                        "devise": "null",
+                        "effectif": "null",
+                        "chiffredaffaire": "null",
+                        "numerodepot": "null",
+                        "dureeexercice": 0,
+                        "datedepot": "null",
+                        "datecloture": "null",
+                    }
+                ]
 
             # Write the dictionary as a JSON object to the file
             documents.append(entreprise_data)
 
         typesense_client.collections["entreprises"].documents.import_(
-            documents, {"action": "create"}
+            documents, {"action": "create", "dirty_values": "coerce_or_drop"}
         )
 
     except Exception as e:
-        logger.exception("An error occurred during the creation of the documents for typesense")
+        logger.exception(
+            "An error occurred during the creation of the documents for typesense"
+        )
         raise e
