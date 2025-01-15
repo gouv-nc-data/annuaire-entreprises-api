@@ -2,6 +2,7 @@ from sqlalchemy import Column, Integer, String, Float
 from app.database.connection import Base
 
 from sqlalchemy import Date, Boolean, ForeignKey
+
 # from sqlalchemy.dialects.postgresql import JSONB
 from typing import List
 from sqlalchemy.orm import relationship, mapped_column
@@ -67,9 +68,9 @@ class Entreprise(Base):
         back_populates="entreprise", cascade="all, delete-orphan"
     )
 
-    # indicateurs_financiers: Mapped[List["IndicateursFinanciers"]] = relationship(
-    #     back_populates="entreprise", cascade="all, delete-orphan"
-    # )
+    indicateurs_financiers: Mapped[List["IndicateursFinanciers"]] = relationship(
+        back_populates="entreprise", cascade="all, delete-orphan"
+    )
 
 
 class Etablissement(Base):
@@ -164,12 +165,14 @@ class IndicateursFinanciers(Base):
     dureeexercice = Column(Integer)
     datedepot = Column(Date)
     datecloture = Column(Date)
-    
+
     entreprise_id: Mapped[int] = mapped_column(
         ForeignKey("entreprise.id", ondelete="CASCADE"), nullable=True
     )
 
-    #     entreprise: Mapped["Entreprise"] = relationship(back_populates="dirigeants")
+    entreprise: Mapped["Entreprise"] = relationship(
+        back_populates="indicateurs_financiers"
+    )
 
     etablissement_id: Mapped[int] = mapped_column(
         ForeignKey("etablissement.id", ondelete="CASCADE"), nullable=True
