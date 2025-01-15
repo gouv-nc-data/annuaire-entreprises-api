@@ -1,5 +1,6 @@
 from app.models.unite_legale import UniteLegaleResponse
 from app.services.formatters.adresse_complete import format_adresse_complete
+from app.services.formatters.indicateurs_financiers import format_indicateurs_financiers
 from app.services.formatters.nom_complet import format_nom_complet
 from app.services.formatters.date import format_date
 from app.services.formatters.dirigeants import format_dirigeants
@@ -7,6 +8,7 @@ from app.services.formatters.etablissements import format_etablissements
 import logging
 
 log = logging.getLogger(__name__)
+
 
 def format_single_entreprise(result, search_params):
     result_entreprise = result["entreprise"]
@@ -43,8 +45,11 @@ def format_single_entreprise(result, search_params):
         "situation_entreprise": get_field("situation_entreprise"),
         "etat_rid": get_field("etat_rid"),
         # Relations
-        "dirigeants": format_dirigeants(get_field("dirigeants")),
         "etablissements": format_etablissements(get_field("etablissements")),
+        "dirigeants": format_dirigeants(get_field("dirigeants")),
+        "indicateurs_financiers": format_indicateurs_financiers(
+            get_field("indicateurs_financiers")
+        ),
     }
 
     formatted_entreprise = UniteLegaleResponse(**entreprise_fields)
