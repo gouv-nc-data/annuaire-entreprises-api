@@ -25,6 +25,7 @@ class SearchParams(BaseModel):
     code_postal: list | None = None
     forme_juridique: list | None = None
     activite_principale: list | None = None
+    dirigeant: str | None = None
 
     # Field Validators (involve one field at a time)
     @field_validator("page", "per_page", mode="before")
@@ -59,6 +60,10 @@ class SearchParams(BaseModel):
     )
     def make_uppercase(cls, value: str) -> str:
         return value.upper()
+
+    @field_validator("dirigeant", mode="before")
+    def clean_name(cls, value: str) -> str:
+        return value.replace("-", " ").lower()
 
     @field_validator(
         "ville",
