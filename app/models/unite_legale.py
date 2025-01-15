@@ -29,7 +29,6 @@ class Etablissement(BaseModel):
 
 
 class Dirigeant(BaseModel):
-    role: str | None = None
     nom: str | None = None
     date_naissance: str | None = None
     nationalite: str | None = None
@@ -42,6 +41,24 @@ class Dirigeant(BaseModel):
     situation_matrimoniale: str | None = None
     maitre_apprentissage: str | None = None
     qualifie_dans_son_metier: str | None = None
+    type_personne: str | None = None
+    ordreaffichage: int | None = None
+    numerochrono: int | None = None
+    actif: bool | None = None
+    fonction: str | None = None
+
+
+class IndicateursFinanciers(BaseModel):
+    noncommandable: str | None = None
+    diffusable: str | None = None
+    resultat: float | None = None
+    devise: str | None = None
+    effectif: str | None = None
+    chiffredaffaire: str | None = None
+    numerodepot: str | None = None
+    dureeexercice: int | None = None
+    datedepot: str | None = None
+    datecloture: str | None = None
 
 
 class UniteLegaleResponse(BaseModel):
@@ -95,3 +112,4 @@ class UniteLegaleResponse(BaseModel):
 
     etablissements: list[Etablissement] | None = None
     dirigeants: list[Dirigeant] | None = None
+    indicateurs_financiers: list[IndicateursFinanciers] | None = None
