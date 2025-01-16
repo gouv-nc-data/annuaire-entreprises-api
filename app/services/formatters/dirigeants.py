@@ -12,7 +12,7 @@ def format_dirigeants(dirigeants=None):
             dirigeant = dirigeant_data
 
             # We only send active dirigeant
-            if dirigeant["actif"] == False:
+            if not dirigeant["actif"]:
                 break
 
             dirigeant = Dirigeant(
