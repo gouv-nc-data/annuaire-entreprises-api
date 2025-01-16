@@ -30,6 +30,9 @@ class Etablissement(BaseModel):
 
 class Dirigeant(BaseModel):
     nom: str | None = None
+    prenoms: str | None = None
+    nom_personne_morale: str | None = None
+    nom_complet: str | None = None
     date_naissance: str | None = None
     nationalite: str | None = None
     adresse: str | None = None

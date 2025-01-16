@@ -58,6 +58,8 @@ def create_typesense_nested_documents():
                 "dirigeants": [
                     {
                         "nom": dirigeant.nom,
+                        "prenoms": dirigeant.prenoms,
+                        "nom_personne_morale": dirigeant.nom_personne_morale or "null",
                         "date_naissance": dirigeant.date_naissance,
                         "nationalite": dirigeant.nationalite,
                         "adresse": dirigeant.adresse,
@@ -99,10 +101,12 @@ def create_typesense_nested_documents():
                 entreprise_data["dirigeants"] = [
                     {
                         "nom": "null",
+                        "prenoms": "null",
+                        "nom_personne_morale": "null",
                         "actif": False,
                         "date_naissance": "null",
                         "nationalite": "null",
-                        "adresse": "null",
+                        # "adresse": "null",
                         "code_postal": "null",
                         "ville": "null",
                         "type_personne": "null",
