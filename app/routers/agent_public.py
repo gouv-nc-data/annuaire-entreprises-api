@@ -14,9 +14,6 @@ class EmailRequest(BaseModel):
 
 @router.post("/agent-public/signup")
 async def agent_plubic_signup(email_request: EmailRequest):
-
-    print('agent publique', email_request)
-
     try:
         email = email_request.email
         reason = email_request.reason
