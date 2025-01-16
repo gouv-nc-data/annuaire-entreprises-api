@@ -24,7 +24,7 @@ class SearchParams(BaseModel):
     ville: list | None = None
     code_postal: list | None = None
     forme_juridique: list | None = None
-    activite_principale: list | None = None
+    code_ape: list | None = None
     etat_rid: str | None = None
     dirigeant: str | None = None
 
@@ -69,7 +69,7 @@ class SearchParams(BaseModel):
     @field_validator(
         "ville",
         "code_postal",
-        "activite_principale",
+        "code_ape",
         mode="before",
     )
     def convert_str_to_upper_list(cls, str_of_values: str) -> list[str]:
@@ -122,7 +122,7 @@ class SearchParams(BaseModel):
 
     @field_validator(
         "forme_juridique",
-        "activite_principale",
+        "code_ape",
         mode="after",
     )
     def list_of_values_must_be_valid(cls, list_of_values: list[str], info) -> list[str]:
@@ -136,6 +136,19 @@ class SearchParams(BaseModel):
                     f"Les valeurs valides : {[value for value in valid_values]}."
                 )
         return list_of_values
+
+    @field_validator(
+        "code_ape",
+        mode="after",
+    )
+    def transform_code_ape(cls, list_of_values: list[str], info) -> list[str]:
+        transformed_values = []
+
+        for value in list_of_values:
+            if value is not None:
+                transformed_values.append(value.replace(".", ""))
+
+        return transformed_values
 
     # Model Validators (involve more than one field at a time)
     @model_validator(mode="after")

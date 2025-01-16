@@ -7,7 +7,8 @@ class SearchParamsBuilder:
 
     PARAMETER_MAPPING = {
         "q": "terms",
-        "situation_entreprise":"etat_rid"
+        "situation_entreprise": "etat_rid",
+        "activite_principale": "code_ape",
     }
 
     @staticmethod

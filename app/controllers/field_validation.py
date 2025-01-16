@@ -19,9 +19,9 @@ VALID_FIELD_VALUES = {
         "valid_values": r"^((0[1-9])|([1-8][0-9])|(9[0-8])|(2A)|(2B))[0-9]{3}$",
         "alias": "code_postal",
     },
-    "activite_principale": {
+    "code_ape": {
         "valid_values": CODES_NAF,
-        "alias": "activite_principale",
+        "alias": "code_ape",
     },
     "etat_rid": {
         "valid_values": ["I", "R"],
