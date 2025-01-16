@@ -25,6 +25,7 @@ class SearchParams(BaseModel):
     code_postal: list | None = None
     forme_juridique: list | None = None
     activite_principale: list | None = None
+    etat_rid: str | None = None
     dirigeant: str | None = None
 
     # Field Validators (involve one field at a time)
@@ -82,6 +83,29 @@ class SearchParams(BaseModel):
     def convert_str_to_list(cls, str_of_values: str) -> list[str]:
         list_of_values = str_to_list(str_of_values.upper())
         return list_of_values
+
+    @field_validator(
+        "etat_rid",
+        mode="before",
+    )
+    def convert_str_to_upper(cls, str: str) -> str:
+        return str.upper()
+
+    @field_validator(
+        "etat_rid",
+        mode="after",
+    )
+    def value_must_be_valid(cls, value: str, info) -> str:
+        valid_values = VALID_FIELD_VALUES.get(info.field_name)["valid_values"]
+        if value not in valid_values:
+            raise InvalidParamError(
+                f"Le paramètre "
+                f"`{VALID_FIELD_VALUES.get(info.field_name)['alias']}` "
+                f"est non valide. "
+                f"Les valeurs valides : {[value for value in valid_values]}."
+            )
+
+        return value
 
     @field_validator("code_postal", "ville", mode="after")
     def list_of_values_should_match_regular_expression(

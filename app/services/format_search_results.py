@@ -42,7 +42,6 @@ def format_single_entreprise(result, search_params):
         "code_ape": get_field("code_ape"),
         "date_creation": format_date(get_field("date_creation")),
         "date_radiation": format_date(get_field("date_radiation")),
-        "situation_entreprise": get_field("situation_entreprise"),
         "etat_rid": get_field("etat_rid"),
         # Relations
         "etablissements": format_etablissements(get_field("etablissements")),

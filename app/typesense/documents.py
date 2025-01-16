@@ -30,7 +30,6 @@ def create_typesense_nested_documents():
                 "code_postal_postale": entreprise.code_postal_postale,
                 "ville_physique": entreprise.ville_physique,
                 "ape": entreprise.ape,
-                "situation_entreprise": entreprise.situation_entreprise,
                 "etat_rid": entreprise.etat_rid,
                 "date_creation": str(entreprise.date_creation),
                 "date_radiation": str(entreprise.date_radiation),

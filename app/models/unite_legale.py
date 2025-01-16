@@ -88,7 +88,6 @@ class UniteLegaleResponse(BaseModel):
     date_radiation: str | None = None
     motif_radiation: str | None = None
     convention_collective: str | None = None
-    situation_entreprise: str | None = None
     etat_rid: str | None = None
 
     # Immatriculation RCS

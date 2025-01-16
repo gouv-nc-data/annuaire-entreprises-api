@@ -39,7 +39,6 @@ class Entreprise(Base):
     date_radiation = Column(Date)
     motif_radiation = Column(String)
     convention_collective = Column(String)
-    situation_entreprise = Column(String)
 
     # Immatriculation RCS
     numero_rcs = Column(String)

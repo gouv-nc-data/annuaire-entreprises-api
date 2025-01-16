@@ -23,6 +23,10 @@ VALID_FIELD_VALUES = {
         "valid_values": CODES_NAF,
         "alias": "activite_principale",
     },
+    "etat_rid": {
+        "valid_values": ["I", "R"],
+        "alias": "etat_rid",
+    },
 }
 
 FIELD_LENGTHS = {
