@@ -1,9 +1,8 @@
-from sqlalchemy import func, select
+from sqlalchemy import select
 from sqlalchemy.orm import Session, joinedload
 from app.database import models
 
 from app.controllers.search_params_model import SearchParams
-from app.controllers.field_validation import VALID_FIELD_VALUES
 import logging
 
 log = logging.getLogger(__name__)
