@@ -68,9 +68,9 @@ class DepotActe(BaseModel):
     diffusable: str | None = None
     numerodepot: str | None = None
     datedepot: str | None = None
-    _date: str | None = None
+    date: str | None = None
     noncommandable: str | None = None
-    _type: str | None = None
+    type: str | None = None
     ordreaffichage: int | None = None
     numerochrono: int | None = None
     rid: str | None = None

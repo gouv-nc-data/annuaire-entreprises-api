@@ -23,15 +23,17 @@ def format_depot_acte(depot_acte=None):
                 diffusable=get_value(depot_acte, "diffusable"),
                 numerodepot=get_value(depot_acte, "numerodepot"),
                 datedepot=format_date(get_value(depot_acte, "datedepot")),
-                _date=format_date(get_value(depot_acte, "_date")),
+                date=format_date(depot_acte["_date"]),
                 noncommandable=get_value(depot_acte, "noncommandable"),
-                _type=get_value(depot_acte, "_type"),
+                type=get_value(depot_acte, "_type"),
                 ordreaffichage=get_value(depot_acte, "ordreaffichage"),
                 numerochrono=get_value(depot_acte, "numerochrono"),
                 rid=get_value(depot_acte, "rid"),
                 libelle=get_value(depot_acte, "libelle"),
                 nature=get_value(depot_acte, "nature"),
             )
+
+            print("depot acte after ????", depot_acte)
 
             depot_acte_formatted.append(depot_acte)
 
