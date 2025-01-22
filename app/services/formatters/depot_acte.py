@@ -33,8 +33,6 @@ def format_depot_acte(depot_acte=None):
                 nature=get_value(depot_acte, "nature"),
             )
 
-            print("depot acte after ????", depot_acte)
-
             depot_acte_formatted.append(depot_acte)
 
     return depot_acte_formatted
