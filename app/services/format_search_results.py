@@ -1,6 +1,7 @@
 from app.models.unite_legale import UniteLegaleResponse
 from app.services.formatters.adresse_complete import format_adresse_complete
 from app.services.formatters.indicateurs_financiers import format_indicateurs_financiers
+from app.services.formatters.depot_acte import format_depot_acte
 from app.services.formatters.nom_complet import format_nom_complet
 from app.services.formatters.date import format_date
 from app.services.formatters.dirigeants import format_dirigeants
@@ -49,6 +50,7 @@ def format_single_entreprise(result, search_params):
         "indicateurs_financiers": format_indicateurs_financiers(
             get_field("indicateurs_financiers")
         ),
+        "depot_actes": format_depot_acte(get_field("depot_actes")),
     }
 
     formatted_entreprise = UniteLegaleResponse(**entreprise_fields)

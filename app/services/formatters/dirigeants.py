@@ -10,7 +10,10 @@ def format_dirigeants(dirigeants=None):
     if dirigeants:
         for dirigeant_data in dirigeants:
 
-            dirigeant = dirigeant_data
+            if isinstance(dirigeant_data, dict):
+                dirigeant = dirigeant_data
+            else:
+                dirigeant = dirigeant_data.__dict__
 
             # We only send active dirigeant
             if not dirigeant["actif"]:

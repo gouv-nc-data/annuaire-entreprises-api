@@ -12,7 +12,10 @@ def format_etablissements(etablissements=None):
     if etablissements:
         for etablissement_data in etablissements:
 
-            etablissement = etablissement_data
+            if isinstance(etablissement_data, dict):
+                etablissement = etablissement_data
+            else:
+                etablissement = etablissement_data.__dict__
 
             etablissement = Etablissement(
                 nom_complet=format_nom_complet(

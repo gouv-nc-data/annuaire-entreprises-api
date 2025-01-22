@@ -1,4 +1,4 @@
-def format_result(items):
+def format_result_sql_alchemy(items):
     results = []
 
     for item in items:

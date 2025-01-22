@@ -15,12 +15,18 @@ def create_typesense_nested_documents():
     Entreprise = models.Entreprise
 
     try:
-        entreprises = db.query(Entreprise).options(joinedload("*")).all()
+        entreprises = (
+            db.query(Entreprise)
+            .options(
+                joinedload(Entreprise.etablissements), joinedload(Entreprise.dirigeants)
+            )
+            .all()
+        )
 
         documents = []
 
         for entreprise in entreprises:
-            # Convert each entreprise and its etablissements to a dictionary
+            # Convert each entreprise and its etablissements, dirigeants to a dictionary
 
             entreprise_data = {
                 "rid": entreprise.rid,
@@ -57,8 +63,8 @@ def create_typesense_nested_documents():
                 ],
                 "dirigeants": [
                     {
-                        "nom": dirigeant.nom,
-                        "prenoms": dirigeant.prenoms,
+                        "nom": dirigeant.nom or "null",
+                        "prenoms": dirigeant.prenoms or "null",
                         "nom_personne_morale": dirigeant.nom_personne_morale or "null",
                         "date_naissance": dirigeant.date_naissance,
                         "nationalite": dirigeant.nationalite,
@@ -73,30 +79,14 @@ def create_typesense_nested_documents():
                     }
                     for dirigeant in entreprise.dirigeants
                 ],
-                "indicateurs_financiers": [
-                    {
-                        "noncommandable": indicateur_financier.noncommandable,
-                        "diffusable": indicateur_financier.diffusable,
-                        "resultat": indicateur_financier.resultat,
-                        "devise": indicateur_financier.devise,
-                        "effectif": indicateur_financier.effectif,
-                        "chiffredaffaire": indicateur_financier.chiffredaffaire,
-                        "numerodepot": indicateur_financier.numerodepot,
-                        "dureeexercice": indicateur_financier.dureeexercice,
-                        "datedepot": str(indicateur_financier.datedepot),
-                        "datecloture": str(indicateur_financier.datecloture),
-                    }
-                    for indicateur_financier in entreprise.indicateurs_financiers
-                ],
             }
 
             # Typense can't index the object if one of its nested field is empty
             # This trick is used to correclty index the parent entreprise even if the nested field (dirigeants) is empty
-            # This is how typesense works
-            # Might change in the future...
+            # This is how typesense works, might change in the future...
             # We're creating false values for 1 nested field
-            # Not sent the API Result tho
-            # Used only to index the parent
+            # Those data are not sent the API Result tho
+            # This is only used to index the parent
             if len(entreprise_data["dirigeants"]) == 0:
                 entreprise_data["dirigeants"] = [
                     {
@@ -113,22 +103,6 @@ def create_typesense_nested_documents():
                         "ordreaffichage": 0,
                         "numerochrono": 0,
                         "fonction": "null",
-                    }
-                ]
-
-            if len(entreprise_data["indicateurs_financiers"]) == 0:
-                entreprise_data["indicateurs_financiers"] = [
-                    {
-                        "noncommandable": "null",
-                        "diffusable": "false",
-                        "resultat": 0.0000,
-                        "devise": "null",
-                        "effectif": "null",
-                        "chiffredaffaire": "null",
-                        "numerodepot": "null",
-                        "dureeexercice": 0,
-                        "datedepot": "null",
-                        "datecloture": "null",
                     }
                 ]
 
