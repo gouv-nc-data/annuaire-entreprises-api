@@ -60,6 +60,7 @@ class Entreprise(Base):
     date_immat_rap = Column(Date)
     date_radiation_rap = Column(Date)
 
+    # Relations
     etablissements: Mapped[List["Etablissement"]] = relationship(
         back_populates="entreprise", cascade="all, delete-orphan"
     )
@@ -69,6 +70,10 @@ class Entreprise(Base):
     )
 
     indicateurs_financiers: Mapped[List["IndicateursFinanciers"]] = relationship(
+        back_populates="entreprise", cascade="all, delete-orphan"
+    )
+
+    depot_actes: Mapped[List["DepotActe"]] = relationship(
         back_populates="entreprise", cascade="all, delete-orphan"
     )
 
@@ -105,14 +110,6 @@ class Etablissement(Base):
 
     entreprise: Mapped["Entreprise"] = relationship(back_populates="etablissements")
 
-    dirigeants: Mapped[List["Dirigeant"]] = relationship(
-        back_populates="etablissement", cascade="all, delete-orphan"
-    )
-
-    # indicateurs_financiers: Mapped[List["IndicateursFinanciers"]] = relationship(
-    #     back_populates="etablissement", cascade="all, delete-orphan"
-    # )
-
 
 class Dirigeant(Base):
     __tablename__ = "dirigeant"
@@ -144,12 +141,6 @@ class Dirigeant(Base):
 
     entreprise: Mapped["Entreprise"] = relationship(back_populates="dirigeants")
 
-    etablissement_id: Mapped[int] = mapped_column(
-        ForeignKey("etablissement.id", ondelete="CASCADE"), nullable=True
-    )
-
-    etablissement: Mapped["Etablissement"] = relationship(back_populates="dirigeants")
-
 
 class IndicateursFinanciers(Base):
     __tablename__ = "indicateurs_financiers"
@@ -174,28 +165,28 @@ class IndicateursFinanciers(Base):
         back_populates="indicateurs_financiers"
     )
 
-    etablissement_id: Mapped[int] = mapped_column(
-        ForeignKey("etablissement.id", ondelete="CASCADE"), nullable=True
-    )
 
-
-#     etablissement: Mapped["Etablissement"] = relationship(
-#         back_populates="indicateurs_financiers"
-#     )
-
-
-class Bilan(Base):
-    __tablename__ = "bilan"
+class DepotActe(Base):
+    __tablename__ = "depot_acte"
 
     id = Column(Integer, primary_key=True)
-    comptes_annuels = Column(String)
-    actes = Column(String)
+    diffusable = Column(String)
+    numerodepot = Column(String)
+    datedepot = Column(Date)
+    _date = Column(Date)
+    noncommandable = Column(String)
+    _type = Column(String)
+    ordreaffichage = Column(Integer)
+    numerochrono = Column(Integer)
+    rid = Column(String)
+    libelle = Column(String)
+    nature = Column(String)
+
     entreprise_id: Mapped[int] = mapped_column(
         ForeignKey("entreprise.id", ondelete="CASCADE"), nullable=True
     )
-    etablissement_id: Mapped[int] = mapped_column(
-        ForeignKey("etablissement.id", ondelete="CASCADE"), nullable=True
-    )
+
+    entreprise: Mapped["Entreprise"] = relationship(back_populates="depot_actes")
 
 
 class AgentPublic(Base):

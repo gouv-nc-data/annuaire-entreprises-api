@@ -64,6 +64,20 @@ class IndicateursFinanciers(BaseModel):
     datecloture: str | None = None
 
 
+class DepotActe(BaseModel):
+    diffusable: str | None = None
+    numerodepot: str | None = None
+    datedepot: str | None = None
+    _date: str | None = None
+    noncommandable: str | None = None
+    _type: str | None = None
+    ordreaffichage: int | None = None
+    numerochrono: int | None = None
+    rid: str | None = None
+    libelle: str | None = None
+    nature: str | None = None
+
+
 class UniteLegaleResponse(BaseModel):
     nom_complet: str | None = None
     rid: str | None = None
@@ -116,3 +130,4 @@ class UniteLegaleResponse(BaseModel):
     etablissements: list[Etablissement] | None = None
     dirigeants: list[Dirigeant] | None = None
     indicateurs_financiers: list[IndicateursFinanciers] | None = None
+    depot_actes: list[DepotActe] | None = None
