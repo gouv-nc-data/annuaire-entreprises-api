@@ -31,9 +31,8 @@ def format_single_entreprise(result, search_params):
         "sigle": get_field("sigle"),
         "designation": get_field("designation"),
         "adresse_complete": format_adresse_complete(
-            get_field("adresse_physique"),
-            get_field("ville_physique"),
-            get_field("code_postal_physique"),
+            get_field("adresse_postale"),
+            get_field("code_postal_postale"),
         ),
         "adresse_physique": get_field("adresse_physique"),
         "ville_physique": get_field("ville_physique"),
