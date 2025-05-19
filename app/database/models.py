@@ -32,7 +32,7 @@ class Entreprise(Base):
     activites_secondaires = Column(String)
     code_nafa = Column(String)
     code_nafa_secondaires = Column(String)
-    nb_salaries = Column(Integer)
+    nb_salaries = Column(String)
     tranche_effectif_salaries = Column(String)
     taille_structure = Column(String)
     date_creation = Column(Date)
