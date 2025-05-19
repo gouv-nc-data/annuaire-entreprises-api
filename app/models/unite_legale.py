@@ -98,7 +98,7 @@ class UniteLegaleResponse(BaseModel):
     activites_secondaires: str | None = None
     code_nafa: str | None = None
     code_nafa_secondaires: str | None = None
-    nb_salaries: int | None = None
+    nb_salaries: str | None = None
     tranche_effectif_salaries: str | None = None
     taille_structure: str | None = None
     date_creation: str | None = None
