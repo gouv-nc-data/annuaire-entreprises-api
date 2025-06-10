@@ -1,4 +1,4 @@
-from app.database.connection import SessionLocal
+from app.database.connection import LocalSession
 
 from app.services.search.search_builder import build_search
 from app.services.formatters.entreprise_results import (
@@ -10,10 +10,15 @@ from app.services.search.typesense.execute_query import execute_typesense_query
 from app.services.search.queries.execute_filter_query import execute_sqlalchemy_query
 
 from app.typesense.connection import typesense_client
+from fastapi import Depends
+from sqlalchemy.orm import Session
 
-
-db = SessionLocal()
-
+def get_db():
+    db = LocalSession()
+    try:
+        yield db
+    finally:
+        LocalSession.remove()
 
 class SearchResult:
     def __init__(self, search_params=None):
@@ -24,7 +29,7 @@ class SearchResult:
         self.total_results = None
         self.run()
 
-    def execute_search(self):
+    def execute_search(self, db: Session = Depends(get_db)):
 
         if self.search_client == "typesense":
             query = execute_typesense_query(

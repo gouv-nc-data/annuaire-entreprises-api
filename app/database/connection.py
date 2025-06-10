@@ -2,6 +2,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.engine import URL
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import scoped_session
+
 
 from app.config import settings
 
@@ -18,6 +20,10 @@ url = URL.create(
 
 engine = create_engine(url).execution_options(isolation_level="AUTOCOMMIT")
 
-SessionLocal = sessionmaker(engine)
+SessionMaker = sessionmaker(
+    autocommit=False,
+    autoflush=False,
+    bind=engine)
+LocalSession = scoped_session(SessionMaker)
 
 Base = declarative_base()

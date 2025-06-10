@@ -1,10 +1,17 @@
 from app.database import models
-from app.database.connection import SessionLocal
+from app.database.connection import LocalSession
+from fastapi import Depends
+from sqlalchemy.orm import Session
+from loguru import logger
 
-db = SessionLocal()
+def get_db():
+    db = LocalSession()
+    try:
+        yield db
+    finally:
+        LocalSession.remove()
 
-
-def signup(email: str, reason: str):
+def signup(email: str, reason: str, db: Session = Depends(get_db)):
     AgentPublic = models.AgentPublic
 
     new_agent_public = AgentPublic(email=email, reason=reason)
