@@ -1,5 +1,5 @@
 from sqlalchemy.orm import joinedload
-
+from sqlalchemy.exc import PendingRollbackError
 from app.database import models
 from app.database.connection import SessionLocal
 
@@ -7,11 +7,16 @@ from app.typesense.connection import typesense_client
 
 from loguru import logger
 
-db = SessionLocal()
-
 
 # Documents is the name in typesense related to indexed objects (item)
 def create_typesense_nested_documents():
+    db = SessionLocal()
+    try:
+        _ = db.connection()
+    except PendingRollbackError:
+        logger.warn("Roll back forcé")
+        db.rollback()
+
     Entreprise = models.Entreprise
 
     try:
