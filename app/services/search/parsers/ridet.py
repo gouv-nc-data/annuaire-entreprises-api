@@ -7,8 +7,7 @@ def is_ridet(query_string: str) -> bool:
     """
     if query_string is None:
         return False
-    clean_query_string = query_string.replace(" ", "")
     ridet_valides = r"\b\d{10}\b"
-    if re.search(ridet_valides, clean_query_string):
+    if re.search(ridet_valides, query_string):
         return True
     return False
