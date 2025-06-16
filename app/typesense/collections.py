@@ -14,7 +14,7 @@ entreprise_schema = {
         {"name": "code_postal_postale", "type": "string", "optional": True},
         {"name": "ville_physique", "type": "string", "facet": True, "optional": True},
         {"name": "ape", "type": "string", "facet": True, "optional": True},
-        {"name": "etat_rid", "type": "string", "facet": True, "optional": True},
+        {"name": "etat_rid", "type": "string", "facet": True, "optional": True, "sort": True},
         {"name": "date_creation", "type": "string", "optional": True, "index": False},
         {"name": "date_radiation", "type": "string", "optional": True, "index": False},
         {"name": "telephone", "type": "string", "optional": True, "index": False},

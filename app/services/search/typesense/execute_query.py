@@ -21,6 +21,10 @@ def execute_typesense_query(client: Client, search_client, search_params: Search
 
         if search_client["query_by"] is not None:
             search_options["query_by"] = search_client["query_by"]
+
+        if search_client["sort_by"] is not None:
+            search_options["sort_by"] = search_client["sort_by"]
+
     else:
         search_options["q"] = "*"
 
