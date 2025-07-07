@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Float
+from sqlalchemy import Column, Enum, Integer, String, Float
 from app.database.connection import Base
 
 from sqlalchemy import Date, Boolean, ForeignKey
@@ -195,3 +195,11 @@ class AgentPublic(Base):
     id = Column(Integer, primary_key=True)
     email = Column(String)
     reason = Column(String)
+
+
+class Feedback(Base):
+    __tablename__ = "feedback"
+
+    id = Column(Integer, primary_key=True)
+    reason = Column(String)
+    type = Column(Enum("bug", "feature", "other", name="type"))
