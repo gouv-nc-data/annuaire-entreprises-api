@@ -14,7 +14,7 @@ from app.config import settings
 
 # from app.logging import setup_sentry
 from app.exceptions.exception_handlers import add_exception_handlers
-from app.routers import public
+from app.routers import feedback, public
 from app.routers import private
 from app.routers import agent_public
 
@@ -119,6 +119,7 @@ models.Base.metadata.create_all(bind=engine)
 app.include_router(public.router, prefix="/api/v1")
 app.include_router(private.router, prefix="/api/v1")
 app.include_router(agent_public.router, prefix="/api/v1")
+app.include_router(feedback.router, prefix="/api/v1")
 
 # Add exception handlers
 add_exception_handlers(app)
