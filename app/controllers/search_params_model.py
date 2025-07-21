@@ -96,7 +96,7 @@ class SearchParams(BaseModel):
         "type_structure",
         mode="before",
     )
-    def convert_str_to_upper(cls, str: str) -> str:
+    def convert_str_to_upper_and_replace_spaces(cls, str: str) -> str:
         str = str.replace(" ", "_")
         return str.upper()
 
