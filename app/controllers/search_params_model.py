@@ -27,6 +27,7 @@ class SearchParams(BaseModel):
     code_ape: list | None = None
     etat_rid: str | None = None
     dirigeant: str | None = None
+    type_structure: str | None = None
 
     # Field Validators (involve one field at a time)
     @field_validator("page", "per_page", mode="before")
@@ -92,7 +93,16 @@ class SearchParams(BaseModel):
         return str.upper()
 
     @field_validator(
+        "type_structure",
+        mode="before",
+    )
+    def convert_str_to_upper(cls, str: str) -> str:
+        str = str.replace(" ", "_")
+        return str.upper()
+
+    @field_validator(
         "etat_rid",
+        "type_structure",
         mode="after",
     )
     def value_must_be_valid(cls, value: str, info) -> str:

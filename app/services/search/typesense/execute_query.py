@@ -10,6 +10,8 @@ def execute_typesense_query(client: Client, search_client, search_params: Search
 
     filter_by_array = []
 
+    print("search_params", search_params)
+
     search_options = {
         "page": page,
         "per_page": per_page,

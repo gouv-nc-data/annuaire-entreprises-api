@@ -1,4 +1,4 @@
-from app.labels.helpers import CODES_NAF, FORME_JURIDIQUES
+from app.labels.helpers import CODES_NAF, FORME_JURIDIQUES, TYPE_STRUCTURES
 
 NUMERIC_FIELD_LIMITS = {
     "page": {"min": 1, "max": 1000, "default": 1, "alias": "page"},
@@ -26,6 +26,10 @@ VALID_FIELD_VALUES = {
     "etat_rid": {
         "valid_values": ["I", "R"],
         "alias": "etat_rid",
+    },
+    "type_structure": {
+        "valid_values": TYPE_STRUCTURES,
+        "alias": "type_structure",
     },
 }
 

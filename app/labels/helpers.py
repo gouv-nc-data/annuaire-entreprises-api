@@ -7,6 +7,7 @@ import app.labels as labels_package
 file_modules = [
     "codes-NAF",
     "forme-juridiques",
+    "type-structures",
 ]
 
 
@@ -25,4 +26,4 @@ loaded_files = {
 # Accessing the data
 FORME_JURIDIQUES = loaded_files["FORME-JURIDIQUES"]
 CODES_NAF = loaded_files["CODES-NAF"]
-
+TYPE_STRUCTURES = loaded_files["TYPE-STRUCTURES"]

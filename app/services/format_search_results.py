@@ -40,6 +40,7 @@ def format_single_entreprise(result, search_params):
         "forme_juridique": get_field("forme_juridique"),
         "ape": get_field("ape"),
         "code_ape": get_field("code_ape"),
+        "type_structure": get_field("type_structure"),
         "date_creation": format_date(get_field("date_creation")),
         "date_radiation": format_date(get_field("date_radiation")),
         "etat_rid": get_field("etat_rid"),

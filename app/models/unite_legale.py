@@ -106,6 +106,7 @@ class UniteLegaleResponse(BaseModel):
     motif_radiation: str | None = None
     convention_collective: str | None = None
     situation_entreprise: str | None = None
+    type_structure: str | None = None
     etat_rid: str | None = None
 
     # Immatriculation RCS

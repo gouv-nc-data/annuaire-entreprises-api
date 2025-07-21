@@ -50,6 +50,7 @@ def create_typesense_nested_documents():
                 "adresse_physique": entreprise.adresse_physique,
                 "adresse_postale": entreprise.adresse_postale,
                 "code_ape": entreprise.code_ape,
+                "type_structure": entreprise.type_structure,
                 "etablissements": [
                     {
                         "rid": etablissement.rid,
